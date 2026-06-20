@@ -46,11 +46,6 @@ export default function HomePage() {
           </Link>
         </div>
 
-        <div className="mt-8 flex flex-wrap justify-center gap-6 text-xs text-[var(--color-ink-soft)]">
-          <span>🟢 100 dogpawrents conquis</span>
-          <span>🔵 Page publique instantanée</span>
-          <span>🟡 Design moderne</span>
-        </div>
       </div>
 
       {/* Ticker */}
