@@ -13,14 +13,19 @@ export default async function AdminLayout({ children }: { children: React.ReactN
   await requireAdmin();
 
   return (
-    <div className="min-h-screen bg-[var(--color-sand)]">
-      <header className="border-b border-[var(--color-ring)] bg-[var(--color-ink)]">
-        <div className="mx-auto max-w-5xl px-5 py-4">
-          <span className="font-semibold text-[var(--color-sand)]">🛠️ Admin — Le Carnet de mon Toutou</span>
+    <div className="min-h-screen bg-[var(--color-cream)]">
+      <header className="bg-[var(--color-orange)]">
+        <div className="mx-auto flex max-w-5xl items-center justify-between px-5 py-3">
+          <Link href="/admin">
+            <span className="text-xl font-bold text-white" style={{ fontFamily: "var(--font-display)" }}>
+              Le Carnet de mon Toutou 🐾
+            </span>
+          </Link>
+          <span className="text-sm font-medium text-white/80">Admin</span>
         </div>
-        <nav className="mx-auto flex max-w-5xl gap-1 overflow-x-auto px-5 pb-3 text-sm">
+        <nav className="mx-auto flex max-w-5xl gap-1 overflow-x-auto px-5 pb-3">
           {NAV.map((item) => (
-            <Link key={item.href} href={item.href} className="whitespace-nowrap rounded-full px-3 py-1.5 text-[var(--color-sand)]/80 hover:bg-white/10">
+            <Link key={item.href} href={item.href} className="whitespace-nowrap rounded-full px-4 py-1.5 text-sm font-semibold text-white/80 hover:bg-white/20 hover:text-white transition">
               {item.label}
             </Link>
           ))}
