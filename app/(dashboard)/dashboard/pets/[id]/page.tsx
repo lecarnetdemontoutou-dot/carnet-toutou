@@ -7,6 +7,7 @@ import { VisibilitySettingsForm } from "@/components/pets/visibility-settings-fo
 import {
   updatePetAction,
   updateVisibilitySettingsAction,
+  deletePetAction,
 } from "@/server/actions/pet.actions";
 
 export default async function EditPetPage({
@@ -29,6 +30,11 @@ export default async function EditPetPage({
   async function handleVisibility(formData: FormData) {
     "use server";
     await updateVisibilitySettingsAction(id, formData);
+  }
+
+  async function handleDelete() {
+    "use server";
+    await deletePetAction(id);
   }
 
   return (
@@ -60,6 +66,27 @@ export default async function EditPetPage({
           action={handleVisibility}
         />
       )}
+
+      <form
+        action={handleDelete}
+        onSubmit={(e) => {
+          if (!confirm(`Supprimer ${pet.name} ? Cette action est irréversible.`)) {
+            e.preventDefault();
+          }
+        }}
+        className="rounded-2xl border border-[var(--color-alert)]/30 bg-[var(--color-alert-soft)] p-5"
+      >
+        <p className="font-semibold text-[var(--color-ink)]">Zone dangereuse</p>
+        <p className="mt-1 text-sm text-[var(--color-ink-soft)]">
+          Supprimer définitivement la fiche de {pet.name} et toutes ses données.
+        </p>
+        <button
+          type="submit"
+          className="mt-4 rounded-full bg-[var(--color-alert)] px-5 py-2.5 text-sm font-semibold text-white"
+        >
+          Supprimer {pet.name}
+        </button>
+      </form>
     </div>
   );
 }

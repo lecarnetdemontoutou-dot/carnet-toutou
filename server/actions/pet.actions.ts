@@ -94,3 +94,14 @@ export async function updateVisibilitySettingsAction(
 
   revalidatePath(`/dashboard/pets/${petId}`);
 }
+
+export async function deletePetAction(petId: string) {
+  const user = await requireUser();
+  const pet = await petRepository.findById(petId);
+  if (!pet) throw new Error("NOT_FOUND");
+  assertOwnsPet(user.id, pet.userId);
+
+  await prisma.pet.delete({ where: { id: petId } });
+  revalidatePath("/dashboard/pets");
+  redirect("/dashboard/pets");
+}
