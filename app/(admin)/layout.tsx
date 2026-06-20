@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { requireAdmin } from "@/lib/permissions/guards";
+import { SignOutButton } from "@/components/forms/sign-out-button";
 
 const NAV = [
   { href: "/admin", label: "Vue d'ensemble" },
@@ -21,7 +22,10 @@ export default async function AdminLayout({ children }: { children: React.ReactN
               Le Carnet de mon Toutou 🐾
             </span>
           </Link>
-          <span className="text-sm font-medium text-white/80">Admin</span>
+          <div className="flex items-center gap-3">
+            <span className="text-sm font-medium text-white/80">Admin</span>
+            <SignOutButton />
+          </div>
         </div>
         <nav className="mx-auto flex max-w-5xl gap-1 overflow-x-auto px-5 pb-3">
           {NAV.map((item) => (

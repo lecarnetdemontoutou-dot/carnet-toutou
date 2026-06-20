@@ -2,6 +2,7 @@ import Link from "next/link";
 import { requireUser } from "@/lib/permissions/guards";
 import { SignOutButton } from "@/components/forms/sign-out-button";
 
+
 const NAV = [
   { href: "/dashboard", label: "Accueil" },
   { href: "/dashboard/pets", label: "Mes chiens" },
@@ -30,9 +31,10 @@ export default async function DashboardLayout({
               Le Carnet de mon Toutou 🐾
             </span>
           </Link>
-          <span className="text-sm font-medium text-white/80">
-            {user.firstName}
-          </span>
+          <div className="flex items-center gap-3">
+            <span className="text-sm font-medium text-white/80">{user.firstName}</span>
+            <SignOutButton />
+          </div>
         </div>
         <nav className="mx-auto flex max-w-4xl gap-1 overflow-x-auto px-5 pb-3">
           {NAV.map((item) => (
