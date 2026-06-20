@@ -46,6 +46,14 @@ export default async function DashboardLayout({
               {item.label}
             </Link>
           ))}
+          {(user as { role?: string }).role === "ADMIN" && (
+            <Link
+              href="/admin"
+              className="whitespace-nowrap rounded-full bg-white/20 px-4 py-1.5 text-sm font-semibold text-white transition hover:bg-white/30"
+            >
+              🛠️ Admin
+            </Link>
+          )}
         </nav>
       </header>
 
