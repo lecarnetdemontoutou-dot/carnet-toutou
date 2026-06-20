@@ -41,7 +41,7 @@ export function RegisterForm() {
         <Field label="Nom" name="lastName" type="text" />
       </div>
       <Field label="Email" name="email" type="email" />
-      <Field label="Mot de passe" name="password" type="password" />
+      <Field label="Mot de passe" name="password" type="password" hint="8 caractères minimum" />
       {error && <p className="text-sm text-[var(--color-alert)]">{error}</p>}
       <button
         type="submit"
@@ -64,10 +64,12 @@ function Field({
   label,
   name,
   type,
+  hint,
 }: {
   label: string;
   name: string;
   type: string;
+  hint?: string;
 }) {
   return (
     <div>
@@ -80,6 +82,9 @@ function Field({
         required
         className="mt-1 w-full rounded-xl border border-[var(--color-ring)] bg-white px-3 py-2.5 text-[var(--color-ink)] outline-none focus:border-[var(--color-clay)]"
       />
+      {hint && (
+        <p className="mt-1 text-xs text-[var(--color-ink-soft)]">{hint}</p>
+      )}
     </div>
   );
 }
