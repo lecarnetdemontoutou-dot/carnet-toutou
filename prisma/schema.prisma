@@ -1,0 +1,262 @@
+// Schéma de base de données — Le Carnet de mon Toutou
+// Documentation : https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// ----------------------------------------------------------------------------
+// Comptes et rôles
+// ----------------------------------------------------------------------------
+
+enum Role {
+  USER
+  ADMIN
+}
+
+model User {
+  id            String    @id @default(cuid())
+  firstName     String
+  lastName      String
+  email         String    @unique
+  emailVerified Boolean   @default(false)
+  phone         String?
+  role          Role      @default(USER)
+
+  pets          Pet[]
+  tags          Tag[]
+
+  // Tables requises par Better Auth (sessions, comptes liés, etc.)
+  sessions      Session[]
+  accounts      Account[]
+
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  @@index([email])
+  @@map("users")
+}
+
+model Session {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  token     String   @unique
+  expiresAt DateTime
+  ipAddress String?
+  userAgent String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([userId])
+  @@map("sessions")
+}
+
+model Account {
+  id                    String    @id @default(cuid())
+  userId                String
+  user                  User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  accountId             String
+  providerId            String
+  password              String?
+  accessToken           String?
+  refreshToken          String?
+  accessTokenExpiresAt  DateTime?
+  refreshTokenExpiresAt DateTime?
+  scope                 String?
+  createdAt             DateTime  @default(now())
+  updatedAt              DateTime @updatedAt
+
+  @@unique([providerId, accountId])
+  @@index([userId])
+  @@map("accounts")
+}
+
+model Verification {
+  id         String   @id @default(cuid())
+  identifier String
+  value      String
+  expiresAt  DateTime
+  createdAt  DateTime @default(now())
+
+  @@index([identifier])
+  @@map("verifications")
+}
+
+// ----------------------------------------------------------------------------
+// Chiens
+// ----------------------------------------------------------------------------
+
+enum Sex {
+  MALE
+  FEMALE
+  UNKNOWN
+}
+
+model Pet {
+  id                    String    @id @default(cuid())
+  userId                String
+  user                  User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  name                  String
+  breed                 String?
+  birthDate             DateTime?
+  sex                   Sex       @default(UNKNOWN)
+  weightKg              Float?
+  photoUrl              String?
+  description           String?
+  publicMessage         String?
+
+  // Contact / urgence
+  emergencyPhone        String?
+  secondaryPhone        String?
+  contactEmail          String?
+  address               String?
+
+  // Santé / vétérinaire
+  vetName               String?
+  vetPhone              String?
+  medicalNotes          String?
+  behaviorNotes         String?
+  emergencyInstructions String?
+
+  // Statut "perdu"
+  isLost                Boolean   @default(false)
+  lostSince             DateTime?
+
+  tags                  Tag[]
+  scanEvents            ScanEvent[]
+  foundReports          FoundReport[]
+  publicSettings        PublicProfileSettings?
+
+  createdAt             DateTime  @default(now())
+  updatedAt             DateTime  @updatedAt
+
+  @@index([userId])
+  @@map("pets")
+}
+
+model PublicProfileSettings {
+  id                 String   @id @default(cuid())
+  petId              String   @unique
+  pet                Pet      @relation(fields: [petId], references: [id], onDelete: Cascade)
+
+  showEmergencyPhone Boolean  @default(true)
+  showSecondaryPhone Boolean  @default(false)
+  showEmail          Boolean  @default(false)
+  showAddress        Boolean  @default(false)
+  showMedicalNotes   Boolean  @default(true)
+  showBehaviorNotes  Boolean  @default(true)
+  showVetInfo        Boolean  @default(false)
+  showLostStatus     Boolean  @default(true)
+
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+
+  @@map("public_profile_settings")
+}
+
+// ----------------------------------------------------------------------------
+// Médailles NFC
+// ----------------------------------------------------------------------------
+
+enum TagStatus {
+  UNASSIGNED
+  ACTIVE
+  DISABLED
+  REPLACED
+  ARCHIVED
+}
+
+model Tag {
+  id             String    @id @default(cuid())
+
+  // Code public, utilisé dans l'URL /t/[tagCode] gravée sur la médaille
+  tagCode        String    @unique
+
+  // Code privé, imprimé sur l'emballage, utilisé une seule fois pour activer
+  activationCode String    @unique
+
+  status         TagStatus @default(UNASSIGNED)
+
+  userId         String?
+  user           User?     @relation(fields: [userId], references: [id])
+
+  petId          String?
+  pet            Pet?      @relation(fields: [petId], references: [id])
+
+  activatedAt    DateTime?
+
+  scanEvents     ScanEvent[]
+  foundReports   FoundReport[]
+
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+
+  @@index([tagCode])
+  @@index([activationCode])
+  @@index([userId])
+  @@index([petId])
+  @@map("tags")
+}
+
+// ----------------------------------------------------------------------------
+// Suivi des scans et actions publiques
+// ----------------------------------------------------------------------------
+
+enum ScanEventType {
+  SCAN
+  CALL_CLICK
+  SMS_CLICK
+  FOUND_CLICK
+}
+
+model ScanEvent {
+  id        String        @id @default(cuid())
+  tagId     String
+  tag       Tag           @relation(fields: [tagId], references: [id])
+  petId     String?
+  pet       Pet?          @relation(fields: [petId], references: [id])
+
+  eventType ScanEventType @default(SCAN)
+  scannedAt DateTime      @default(now())
+
+  ip        String?
+  userAgent String?
+  referer   String?
+  country   String?
+  city      String?
+
+  @@index([tagId])
+  @@index([petId])
+  @@index([scannedAt])
+  @@map("scan_events")
+}
+
+// ----------------------------------------------------------------------------
+// Signalements "j'ai trouvé ce chien"
+// ----------------------------------------------------------------------------
+
+model FoundReport {
+  id           String   @id @default(cuid())
+  petId        String
+  pet          Pet      @relation(fields: [petId], references: [id])
+  tagId        String?
+  tag          Tag?     @relation(fields: [tagId], references: [id])
+
+  finderName   String
+  finderPhone  String
+  message      String?
+  locationText String?
+  latitude     Float?
+  longitude    Float?
+
+  createdAt    DateTime @default(now())
+
+  @@index([petId])
+  @@map("found_reports")
+}
