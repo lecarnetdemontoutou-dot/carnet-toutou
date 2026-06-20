@@ -50,8 +50,13 @@ export async function updatePetAction(petId: string, formData: FormData) {
 
   const data = readPetFormData(formData);
 
+  // Sécurité : si le formulaire ne renvoie pas de photoUrl (champ vide ou non soumis),
+  // on conserve la photo existante en base plutôt que de l'effacer.
+  const photoUrl = data.photoUrl ?? pet.photoUrl ?? undefined;
+
   await petRepository.update(petId, {
     ...data,
+    photoUrl,
     birthDate: data.birthDate ? new Date(data.birthDate) : null,
   });
 
