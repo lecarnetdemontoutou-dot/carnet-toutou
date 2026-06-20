@@ -32,23 +32,34 @@ export async function activateTagAction(
   }
 
   const petId = parsed.data.petId;
+  const petName = formData.get("petName")?.toString().trim();
 
-  // Si aucun chien existant n'est sélectionné, on en crée un minimal à partir du prénom fourni
-  async function resolvePetId(): Promise<string | null> {
-    if (petId) return petId;
-    const name = formData.get("petName")?.toString().trim();
-    if (!name) return null;
-    const pet = await petRepository.create(user.id, { name });
-    return pet.id;
-  }
-
-  const resolvedPetId = await resolvePetId();
-  if (!resolvedPetId) {
+  if (!petId && !petName) {
     return {
       status: "error",
       message: "Indique le prénom de ton chien, ou choisis un chien existant.",
     };
   }
+
+  // On valide le code d'activation AVANT de créer un éventuel nouveau chien
+  // pour éviter de laisser des fiches orphelines en cas de code invalide.
+  const { tagRepository: tr } = await import("@/server/repositories/tag.repository");
+  const tag = await tr.findByActivationCode(parsed.data.activationCode);
+  if (!tag) {
+    return { status: "error", message: "Ce code d'activation n'existe pas. Vérifie la saisie." };
+  }
+  if (tag.status !== "UNASSIGNED") {
+    const messages: Record<string, string> = {
+      ACTIVE: "Cette médaille est déjà activée sur un compte.",
+      DISABLED: "Cette médaille a été désactivée. Contacte le support.",
+      REPLACED: "Cette médaille a été remplacée et n'est plus valide.",
+      ARCHIVED: "Cette médaille a été remplacée et n'est plus valide.",
+    };
+    return { status: "error", message: messages[tag.status] ?? "Code invalide." };
+  }
+
+  // Code valide → on peut créer le chien si nécessaire
+  const resolvedPetId = petId ?? (await petRepository.create(user.id, { name: petName! })).id;
 
   const result = await activateTag({
     activationCode: parsed.data.activationCode,
@@ -57,13 +68,7 @@ export async function activateTagAction(
   });
 
   if (!result.success) {
-    const messages: Record<string, string> = {
-      NOT_FOUND: "Ce code d'activation n'existe pas. Vérifie la saisie.",
-      ALREADY_ACTIVE: "Cette médaille est déjà activée sur un compte.",
-      DISABLED: "Cette médaille a été désactivée. Contacte le support.",
-      REPLACED: "Cette médaille a été remplacée et n'est plus valide.",
-    };
-    return { status: "error", message: messages[result.code] };
+    return { status: "error", message: "Une erreur inattendue est survenue. Contacte le support." };
   }
 
   revalidatePath("/dashboard/tags");

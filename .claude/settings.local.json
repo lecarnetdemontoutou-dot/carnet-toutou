@@ -28,7 +28,10 @@
       "Bash(git remote *)",
       "Bash(git push *)",
       "Bash(DATABASE_URL=postgresql://neondb_owner:npg_o12cGRHTKNvM@ep-sweet-salad-ai68mzrw.c-4.us-east-1.aws.neon.tech/neondb?sslmode=require npx tsx -e ' *)",
-      "Bash(grep -v \"Use \\\\`node\")"
+      "Bash(grep -v \"Use \\\\`node\")",
+      "Bash(npx prisma *)",
+      "Bash(DATABASE_URL=\"postgresql://neondb_owner:npg_o12cGRHTKNvM@ep-sweet-salad-ai68mzrw.c-4.us-east-1.aws.neon.tech/neondb?sslmode=require\" npx prisma db push)",
+      "Bash(npx tsc *)"
     ]
   }
 }

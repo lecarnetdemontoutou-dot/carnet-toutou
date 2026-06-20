@@ -221,7 +221,7 @@ model ScanEvent {
   tagId     String
   tag       Tag           @relation(fields: [tagId], references: [id])
   petId     String?
-  pet       Pet?          @relation(fields: [petId], references: [id])
+  pet       Pet?          @relation(fields: [petId], references: [id], onDelete: SetNull)
 
   eventType ScanEventType @default(SCAN)
   scannedAt DateTime      @default(now())
@@ -245,7 +245,7 @@ model ScanEvent {
 model FoundReport {
   id           String   @id @default(cuid())
   petId        String
-  pet          Pet      @relation(fields: [petId], references: [id])
+  pet          Pet      @relation(fields: [petId], references: [id], onDelete: Cascade)
   tagId        String?
   tag          Tag?     @relation(fields: [tagId], references: [id])
 

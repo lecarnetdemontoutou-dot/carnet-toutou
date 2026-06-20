@@ -29,6 +29,11 @@ export const auth = betterAuth({
     expiresIn: 60 * 60 * 24 * 30, // 30 jours
     updateAge: 60 * 60 * 24, // rafraîchie une fois par jour
   },
+  rateLimit: {
+    enabled: true,
+    window: 60,       // fenêtre de 60 secondes
+    max: 10,          // max 10 tentatives par fenêtre par IP
+  },
 });
 
 export type Session = typeof auth.$Infer.Session;

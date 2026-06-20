@@ -1,9 +1,14 @@
 import { requireUser } from "@/lib/permissions/guards";
-import { updateAccountAction } from "@/server/actions/account.actions";
+import { updateAccountAction, deleteAccountAction } from "@/server/actions/account.actions";
 import { SignOutButton } from "@/components/forms/sign-out-button";
 
 export default async function SettingsPage() {
   const user = await requireUser();
+
+  async function handleDelete() {
+    "use server";
+    await deleteAccountAction();
+  }
 
   return (
     <div className="max-w-md space-y-6">
@@ -48,6 +53,34 @@ export default async function SettingsPage() {
       </form>
 
       <SignOutButton />
+
+      <form
+        action={handleDelete}
+        onSubmit={(e) => {
+          if (!confirm("Supprimer définitivement ton compte et toutes tes données ? Cette action est irréversible.")) {
+            e.preventDefault();
+          }
+        }}
+        className="rounded-2xl border border-[var(--color-alert)]/30 bg-[var(--color-alert-soft)] p-5"
+      >
+        <p className="font-semibold text-[var(--color-ink)]">Supprimer mon compte</p>
+        <p className="mt-1 text-sm text-[var(--color-ink-soft)]">
+          Toutes tes données (chiens, médailles, historique de scans) seront effacées définitivement.
+          Conformément au RGPD, tu peux exercer ce droit à tout moment.
+        </p>
+        <button
+          type="submit"
+          className="mt-4 rounded-full bg-[var(--color-alert)] px-5 py-2.5 text-sm font-semibold text-white"
+        >
+          Supprimer mon compte
+        </button>
+      </form>
+
+      <p className="text-center text-xs text-[var(--color-ink-soft)]">
+        <a href="/confidentialite" className="underline">Politique de confidentialité</a>
+        {" · "}
+        <a href="/mentions-legales" className="underline">Mentions légales</a>
+      </p>
     </div>
   );
 }

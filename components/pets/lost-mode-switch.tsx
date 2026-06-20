@@ -10,8 +10,12 @@ export function LostModeSwitch({ petId, initialValue }: { petId: string; initial
   function toggle() {
     const next = !isLost;
     setIsLost(next);
-    startTransition(() => {
-      setLostStatusAction(petId, next);
+    startTransition(async () => {
+      try {
+        await setLostStatusAction(petId, next);
+      } catch {
+        setIsLost(!next); // rollback si erreur serveur
+      }
     });
   }
 

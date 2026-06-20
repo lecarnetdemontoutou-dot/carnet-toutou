@@ -92,6 +92,12 @@ export function FoundReportForm({ tagCode }: { tagCode: string }) {
         <p className="text-sm text-[var(--color-alert)]">{state.message}</p>
       )}
 
+      <p className="text-xs text-[var(--color-ink-soft)]">
+        Vos coordonnées seront transmises au propriétaire uniquement pour faciliter la restitution du chien,
+        conformément au RGPD. Elles ne seront pas utilisées à d&apos;autres fins.{" "}
+        <a href="/confidentialite" className="underline">En savoir plus</a>.
+      </p>
+
       <button
         type="submit"
         disabled={pending}
