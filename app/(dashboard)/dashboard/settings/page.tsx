@@ -2,6 +2,7 @@ import { requireUser } from "@/lib/permissions/guards";
 import { updateAccountAction, deleteAccountAction } from "@/server/actions/account.actions";
 import { SignOutButton } from "@/components/forms/sign-out-button";
 import { SubmitButton } from "@/components/ui/submit-button";
+import { DeleteForm } from "@/components/ui/delete-form";
 
 export default async function SettingsPage({
   searchParams,
@@ -64,27 +65,18 @@ export default async function SettingsPage({
 
       <SignOutButton />
 
-      <form
-        action={handleDelete}
-        onSubmit={(e) => {
-          if (!confirm("Supprimer définitivement ton compte et toutes tes données ? Cette action est irréversible.")) {
-            e.preventDefault();
-          }
-        }}
-        className="rounded-2xl border border-[var(--color-alert)]/30 bg-[var(--color-alert-soft)] p-5"
-      >
+      <div className="rounded-2xl border border-[var(--color-alert)]/30 bg-[var(--color-alert-soft)] p-5">
         <p className="font-semibold text-[var(--color-ink)]">Supprimer mon compte</p>
         <p className="mt-1 text-sm text-[var(--color-ink-soft)]">
           Toutes tes données (chiens, médailles, historique de scans) seront effacées définitivement.
           Conformément au RGPD, tu peux exercer ce droit à tout moment.
         </p>
-        <button
-          type="submit"
-          className="mt-4 rounded-full bg-[var(--color-alert)] px-5 py-2.5 text-sm font-semibold text-white"
-        >
-          Supprimer mon compte
-        </button>
-      </form>
+        <DeleteForm
+          action={handleDelete}
+          confirmMessage="Supprimer définitivement ton compte et toutes tes données ? Cette action est irréversible."
+          label="Supprimer mon compte"
+        />
+      </div>
 
       <p className="text-center text-xs text-[var(--color-ink-soft)]">
         <a href="/confidentialite" className="underline">Politique de confidentialité</a>
