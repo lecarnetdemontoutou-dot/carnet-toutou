@@ -24,7 +24,7 @@ export default async function TagsPage() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="font-[var(--font-display)] text-2xl font-semibold italic">
+        <h1 className="text-3xl font-bold text-[var(--color-orange)]" style={{ fontFamily: "var(--font-display)" }}>
           Mes médailles
         </h1>
         <p className="text-[var(--color-ink-soft)]">

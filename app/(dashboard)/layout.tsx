@@ -1,8 +1,9 @@
 import Link from "next/link";
 import { requireUser } from "@/lib/permissions/guards";
+import { SignOutButton } from "@/components/forms/sign-out-button";
 
 const NAV = [
-  { href: "/dashboard", label: "Vue d'ensemble" },
+  { href: "/dashboard", label: "Accueil" },
   { href: "/dashboard/pets", label: "Mes chiens" },
   { href: "/dashboard/tags", label: "Mes médailles" },
   { href: "/dashboard/scans", label: "Scans" },
@@ -17,28 +18,35 @@ export default async function DashboardLayout({
   const user = await requireUser();
 
   return (
-    <div className="min-h-screen bg-[var(--color-sand)]">
-      <header className="border-b border-[var(--color-ring)] bg-white/60">
-        <div className="mx-auto flex max-w-4xl items-center justify-between px-5 py-4">
-          <span className="font-[var(--font-display)] text-lg font-semibold italic">
-            🐾 Le Carnet de mon Toutou
-          </span>
-          <span className="text-sm text-[var(--color-ink-soft)]">
-            {user.email}
+    <div className="min-h-screen bg-[var(--color-cream)]">
+      {/* Barre de navigation orange */}
+      <header className="bg-[var(--color-orange)]">
+        <div className="mx-auto flex max-w-4xl items-center justify-between px-5 py-3">
+          <Link href="/dashboard">
+            <span
+              className="text-xl font-bold text-white"
+              style={{ fontFamily: "var(--font-display)" }}
+            >
+              Le Carnet de mon Toutou 🐾
+            </span>
+          </Link>
+          <span className="text-sm font-medium text-white/80">
+            {user.firstName}
           </span>
         </div>
-        <nav className="mx-auto flex max-w-4xl gap-1 overflow-x-auto px-5 pb-3 text-sm">
+        <nav className="mx-auto flex max-w-4xl gap-1 overflow-x-auto px-5 pb-3">
           {NAV.map((item) => (
             <Link
               key={item.href}
               href={item.href}
-              className="whitespace-nowrap rounded-full px-3 py-1.5 text-[var(--color-ink-soft)] hover:bg-[var(--color-card)]"
+              className="whitespace-nowrap rounded-full px-4 py-1.5 text-sm font-semibold text-white/80 hover:bg-white/20 hover:text-white transition"
             >
               {item.label}
             </Link>
           ))}
         </nav>
       </header>
+
       <main className="mx-auto max-w-4xl px-5 py-8">{children}</main>
     </div>
   );

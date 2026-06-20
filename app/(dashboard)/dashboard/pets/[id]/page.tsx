@@ -43,7 +43,7 @@ export default async function EditPetPage({
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
-        <h1 className="font-[var(--font-display)] text-2xl font-semibold italic">
+        <h1 className="text-3xl font-bold text-[var(--color-orange)]" style={{ fontFamily: "var(--font-display)" }}>
           {pet.name}
         </h1>
         <a

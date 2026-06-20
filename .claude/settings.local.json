@@ -31,7 +31,11 @@
       "Bash(grep -v \"Use \\\\`node\")",
       "Bash(npx prisma *)",
       "Bash(DATABASE_URL=\"postgresql://neondb_owner:npg_o12cGRHTKNvM@ep-sweet-salad-ai68mzrw.c-4.us-east-1.aws.neon.tech/neondb?sslmode=require\" npx prisma db push)",
-      "Bash(npx tsc *)"
+      "Bash(npx tsc *)",
+      "WebFetch(domain:www.lecarnetdemontoutou.fr)",
+      "mcp__Claude_in_Chrome__navigate",
+      "mcp__Claude_in_Chrome__tabs_context_mcp",
+      "Bash(sed -i '' 's/className=\"font-\\\\[var\\(--font-display\\)\\\\] text-2xl font-semibold italic\"/className=\"text-3xl font-bold text-[var\\(--color-orange\\)]\" style={{ fontFamily: \"var\\(--font-display\\)\" }}/g' \\\\ *)"
     ]
   }
 }

@@ -18,7 +18,7 @@ export default async function SettingsPage({
 
   return (
     <div className="max-w-md space-y-6">
-      <h1 className="font-[var(--font-display)] text-2xl font-semibold italic">
+      <h1 className="text-3xl font-bold text-[var(--color-orange)]" style={{ fontFamily: "var(--font-display)" }}>
         Réglages du compte
       </h1>
 
