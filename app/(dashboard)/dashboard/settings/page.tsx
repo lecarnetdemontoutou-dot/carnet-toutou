@@ -1,8 +1,14 @@
 import { requireUser } from "@/lib/permissions/guards";
 import { updateAccountAction, deleteAccountAction } from "@/server/actions/account.actions";
 import { SignOutButton } from "@/components/forms/sign-out-button";
+import { SubmitButton } from "@/components/ui/submit-button";
 
-export default async function SettingsPage() {
+export default async function SettingsPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ saved?: string }>;
+}) {
+  const { saved } = await searchParams;
   const user = await requireUser();
 
   async function handleDelete() {
@@ -15,6 +21,12 @@ export default async function SettingsPage() {
       <h1 className="font-[var(--font-display)] text-2xl font-semibold italic">
         Réglages du compte
       </h1>
+
+      {saved === "1" && (
+        <div className="rounded-2xl bg-[var(--color-green)]/30 px-5 py-3 text-sm font-medium text-[var(--color-ink)]">
+          ✓ Modifications enregistrées
+        </div>
+      )}
 
       <form action={updateAccountAction} className="space-y-4 rounded-2xl bg-white/70 p-5">
         <div className="grid grid-cols-2 gap-3">
@@ -44,12 +56,10 @@ export default async function SettingsPage() {
           />
         </div>
         <p className="text-sm text-[var(--color-ink-soft)]">Email : {user.email}</p>
-        <button
-          type="submit"
-          className="rounded-full bg-[var(--color-clay)] px-5 py-2.5 text-sm font-semibold text-white"
-        >
-          Enregistrer
-        </button>
+        <SubmitButton
+          label="Enregistrer"
+          className="rounded-full bg-[var(--color-clay)] px-5 py-2.5 text-sm font-semibold text-white disabled:opacity-60"
+        />
       </form>
 
       <SignOutButton />

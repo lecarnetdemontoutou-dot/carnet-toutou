@@ -12,10 +12,13 @@ import {
 
 export default async function EditPetPage({
   params,
+  searchParams,
 }: {
   params: Promise<{ id: string }>;
+  searchParams: Promise<{ saved?: string }>;
 }) {
   const { id } = await params;
+  const { saved } = await searchParams;
   const user = await requireUser();
   const pet = await petRepository.findById(id);
 
@@ -51,6 +54,12 @@ export default async function EditPetPage({
           Voir la page publique →
         </a>
       </div>
+
+      {saved === "1" && (
+        <div className="rounded-2xl bg-[var(--color-green)]/30 px-5 py-3 text-sm font-medium text-[var(--color-ink)]">
+          ✓ Modifications enregistrées
+        </div>
+      )}
 
       <LostModeSwitch petId={pet.id} initialValue={pet.isLost} />
 

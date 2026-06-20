@@ -55,6 +55,7 @@ export async function updatePetAction(petId: string, formData: FormData) {
   });
 
   revalidatePath(`/dashboard/pets/${petId}`);
+  redirect(`/dashboard/pets/${petId}?saved=1`);
 }
 
 export async function setLostStatusAction(petId: string, isLost: boolean) {
@@ -93,6 +94,7 @@ export async function updateVisibilitySettingsAction(
   });
 
   revalidatePath(`/dashboard/pets/${petId}`);
+  redirect(`/dashboard/pets/${petId}?saved=1`);
 }
 
 export async function deletePetAction(petId: string) {

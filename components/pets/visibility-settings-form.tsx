@@ -1,4 +1,5 @@
 import type { PublicProfileSettings } from "@prisma/client";
+import { SubmitButton } from "@/components/ui/submit-button";
 
 type VisibilityKey =
   | "showEmergencyPhone"
@@ -50,12 +51,10 @@ export function VisibilitySettingsForm({
           </label>
         ))}
       </div>
-      <button
-        type="submit"
-        className="mt-4 rounded-full bg-[var(--color-ink)] px-5 py-2.5 text-sm font-semibold text-[var(--color-sand)]"
-      >
-        Enregistrer les réglages
-      </button>
+      <SubmitButton
+        label="Enregistrer les réglages"
+        className="mt-4 rounded-full bg-[var(--color-ink)] px-5 py-2.5 text-sm font-semibold text-[var(--color-sand)] disabled:opacity-60"
+      />
     </form>
   );
 }

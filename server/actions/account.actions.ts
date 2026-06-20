@@ -19,6 +19,7 @@ export async function updateAccountAction(formData: FormData) {
   });
 
   revalidatePath("/dashboard/settings");
+  redirect("/dashboard/settings?saved=1");
 }
 
 export async function deleteAccountAction() {

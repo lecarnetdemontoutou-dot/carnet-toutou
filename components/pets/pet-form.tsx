@@ -1,4 +1,5 @@
 import type { Pet } from "@prisma/client";
+import { SubmitButton } from "@/components/ui/submit-button";
 
 export function PetForm({
   pet,
@@ -61,12 +62,10 @@ export function PetForm({
         />
       </Section>
 
-      <button
-        type="submit"
-        className="w-full rounded-full bg-[var(--color-clay)] px-5 py-3.5 font-semibold text-white transition active:scale-[0.98]"
-      >
-        {submitLabel}
-      </button>
+      <SubmitButton
+        label={submitLabel}
+        className="w-full rounded-full bg-[var(--color-clay)] px-5 py-3.5 font-semibold text-white transition active:scale-[0.98] disabled:opacity-60"
+      />
     </form>
   );
 }
