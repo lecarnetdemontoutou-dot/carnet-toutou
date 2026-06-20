@@ -2,16 +2,18 @@ export function AuthCard({
   title,
   subtitle,
   children,
+  logoHref = "/",
 }: {
   title: string;
   subtitle?: string;
   children: React.ReactNode;
+  logoHref?: string;
 }) {
   return (
     <main className="flex min-h-screen flex-col items-center bg-[var(--color-cream)]">
       {/* Barre de marque orange */}
       <div className="w-full bg-[var(--color-orange)] px-6 py-4 text-center">
-        <a href="/" className="inline-block">
+        <a href={logoHref} className="inline-block">
           <span
             className="text-2xl font-bold text-white"
             style={{ fontFamily: "var(--font-display)" }}

@@ -17,6 +17,7 @@ export default async function ActivatePage() {
     <AuthCard
       title="Activer ta médaille"
       subtitle="Indique le code fourni avec ta médaille pour la relier à ton chien."
+      logoHref="/dashboard"
     >
       <ActivateForm existingPets={pets.map((p) => ({ id: p.id, name: p.name }))} />
     </AuthCard>
