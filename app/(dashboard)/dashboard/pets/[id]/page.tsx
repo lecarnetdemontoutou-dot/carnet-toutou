@@ -21,6 +21,16 @@ export default async function EditPetPage({
   if (!pet) notFound();
   assertOwnsPet(user.id, pet.userId);
 
+  async function handleUpdate(formData: FormData) {
+    "use server";
+    await updatePetAction(id, formData);
+  }
+
+  async function handleVisibility(formData: FormData) {
+    "use server";
+    await updateVisibilitySettingsAction(id, formData);
+  }
+
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
@@ -40,14 +50,14 @@ export default async function EditPetPage({
 
       <PetForm
         pet={pet}
-        action={updatePetAction.bind(null, pet.id)}
+        action={handleUpdate}
         submitLabel="Enregistrer les modifications"
       />
 
       {pet.publicSettings && (
         <VisibilitySettingsForm
           settings={pet.publicSettings}
-          action={updateVisibilitySettingsAction.bind(null, pet.id)}
+          action={handleVisibility}
         />
       )}
     </div>
