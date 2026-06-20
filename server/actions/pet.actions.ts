@@ -14,6 +14,7 @@ function readPetFormData(formData: FormData) {
     birthDate: formData.get("birthDate") || undefined,
     sex: formData.get("sex") || "UNKNOWN",
     weightKg: formData.get("weightKg") || undefined,
+    photoUrl: formData.get("photoUrl") || undefined,
     description: formData.get("description") || undefined,
     publicMessage: formData.get("publicMessage") || undefined,
     emergencyPhone: formData.get("emergencyPhone") || undefined,
