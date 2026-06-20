@@ -40,14 +40,14 @@ export default async function EditPetPage({
 
       <PetForm
         pet={pet}
-        action={(formData) => updatePetAction(pet.id, formData)}
+        action={updatePetAction.bind(null, pet.id)}
         submitLabel="Enregistrer les modifications"
       />
 
       {pet.publicSettings && (
         <VisibilitySettingsForm
           settings={pet.publicSettings}
-          action={(formData) => updateVisibilitySettingsAction(pet.id, formData)}
+          action={updateVisibilitySettingsAction.bind(null, pet.id)}
         />
       )}
     </div>
