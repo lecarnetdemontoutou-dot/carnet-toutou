@@ -1,5 +1,9 @@
+"use client";
+
+import { useState } from "react";
 import type { Pet } from "@prisma/client";
 import { SubmitButton } from "@/components/ui/submit-button";
+import { PhotoUpload } from "@/components/pets/photo-upload";
 
 export function PetForm({
   pet,
@@ -10,9 +14,14 @@ export function PetForm({
   action: (formData: FormData) => void;
   submitLabel: string;
 }) {
+  const [photoUrl, setPhotoUrl] = useState<string>(pet?.photoUrl ?? "");
+
   return (
     <form action={action} className="space-y-6">
-      <Section title="Informations générales">
+      <Section title="Photo & informations générales">
+        <PhotoUpload currentUrl={pet?.photoUrl} onUpload={setPhotoUrl} />
+        <input type="hidden" name="photoUrl" value={photoUrl} />
+
         <Field label="Prénom du chien" name="name" defaultValue={pet?.name} required />
         <Field label="Race" name="breed" defaultValue={pet?.breed ?? ""} />
         <div className="grid grid-cols-2 gap-3">
@@ -64,7 +73,7 @@ export function PetForm({
 
       <SubmitButton
         label={submitLabel}
-        className="w-full rounded-full bg-[var(--color-clay)] px-5 py-3.5 font-semibold text-white transition active:scale-[0.98] disabled:opacity-60"
+        className="w-full rounded-full bg-[var(--color-orange)] px-5 py-3.5 font-bold text-white transition active:scale-[0.98] disabled:opacity-60"
       />
     </form>
   );
@@ -100,7 +109,7 @@ function Field({
         type={type}
         required={required}
         defaultValue={defaultValue ?? ""}
-        className="mt-1 w-full rounded-xl border border-[var(--color-ring)] bg-white px-3 py-2.5 text-[var(--color-ink)] outline-none focus:border-[var(--color-clay)]"
+        className="mt-1 w-full rounded-xl border border-[var(--color-ring)] bg-white px-3 py-2.5 text-[var(--color-ink)] outline-none focus:border-[var(--color-orange)]"
       />
     </div>
   );
@@ -125,7 +134,7 @@ function TextAreaField({
         defaultValue={defaultValue ?? ""}
         maxLength={maxLength}
         rows={3}
-        className="mt-1 w-full rounded-xl border border-[var(--color-ring)] bg-white px-3 py-2.5 text-[var(--color-ink)] outline-none focus:border-[var(--color-clay)]"
+        className="mt-1 w-full rounded-xl border border-[var(--color-ring)] bg-white px-3 py-2.5 text-[var(--color-ink)] outline-none focus:border-[var(--color-orange)]"
       />
     </div>
   );
@@ -148,7 +157,7 @@ function SelectField({
       <select
         name={name}
         defaultValue={defaultValue}
-        className="mt-1 w-full rounded-xl border border-[var(--color-ring)] bg-white px-3 py-2.5 text-[var(--color-ink)] outline-none focus:border-[var(--color-clay)]"
+        className="mt-1 w-full rounded-xl border border-[var(--color-ring)] bg-white px-3 py-2.5 text-[var(--color-ink)] outline-none focus:border-[var(--color-orange)]"
       >
         {options.map((o) => (
           <option key={o.value} value={o.value}>
