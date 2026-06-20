@@ -1,28 +1,59 @@
 @import "tailwindcss";
 
-:root {
-  /* --- Palette --- */
-  --color-sand: #faf6f0;       /* fond principal, chaud et doux */
-  --color-card: #f1ebe1;       /* fond des cartes / blocs secondaires */
-  --color-ink: #2b2420;        /* texte principal, brun très foncé (pas de noir pur) */
-  --color-ink-soft: #6b5f54;   /* texte secondaire */
-  --color-clay: #c1694f;       /* accent principal — bouton "Appeler", identité de marque */
-  --color-clay-dark: #a8543c;
-  --color-sage: #6b7a5e;       /* accent secondaire — "SMS / message" */
-  --color-sage-dark: #56624a;
-  --color-alert: #d94f36;      /* statut "chien perdu" — distinct de l'accent principal */
-  --color-alert-soft: #fbe4dd;
-  --color-ring: #d8c9b6;       /* bordures discrètes */
+/* MoreSugar — police manuscrite custom (titres) */
+@font-face {
+  font-family: "MoreSugar";
+  src: url("/fonts/MoreSugar.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
 
-  --font-display: var(--font-fraunces);
-  --font-body: var(--font-jakarta);
+:root {
+  /* --- Palette de marque --- */
+  --color-cream: #fdf6ee;         /* fond principal */
+  --color-sand: #fdf6ee;          /* alias pour compat */
+  --color-card: #f5ece0;          /* fond des cartes / blocs secondaires */
+  --color-ink: #2a2118;           /* texte principal — jamais de noir pur */
+  --color-ink-soft: #7a6a5a;      /* texte secondaire, sous-titres */
+
+  --color-orange: #ff5e17;        /* CTA principal */
+  --color-orange-dark: #e04e0e;
+  --color-blue: #6380b8;          /* boutons secondaires, accents */
+  --color-blue-dark: #4f679f;
+  --color-peach: #db906c;         /* accents doux */
+  --color-sky: #a9c8eb;           /* fonds de sections */
+  --color-green: #9fdd97;         /* validation, bandeaux */
+  --color-yellow: #f7bf31;        /* badges, accents */
+
+  --color-alert: #ff5e17;         /* statut "perdu" (orange vif) */
+  --color-alert-soft: #fff0e8;
+  --color-ring: #e8d8c8;          /* séparateurs discrets */
+
+  /* Rétro-compat avec les anciens noms utilisés dans les composants */
+  --color-clay: #ff5e17;
+  --color-clay-dark: #e04e0e;
+  --color-sage: #6380b8;
+  --color-sage-dark: #4f679f;
+
+  --font-display: "MoreSugar", var(--font-poppins), sans-serif;
+  --font-body: var(--font-poppins), sans-serif;
 }
 
 @theme inline {
+  --color-cream: var(--color-cream);
   --color-sand: var(--color-sand);
   --color-card: var(--color-card);
   --color-ink: var(--color-ink);
   --color-ink-soft: var(--color-ink-soft);
+  --color-orange: var(--color-orange);
+  --color-orange-dark: var(--color-orange-dark);
+  --color-blue: var(--color-blue);
+  --color-blue-dark: var(--color-blue-dark);
+  --color-peach: var(--color-peach);
+  --color-sky: var(--color-sky);
+  --color-green: var(--color-green);
+  --color-yellow: var(--color-yellow);
   --color-clay: var(--color-clay);
   --color-clay-dark: var(--color-clay-dark);
   --color-sage: var(--color-sage);
@@ -35,7 +66,7 @@
 }
 
 body {
-  background: var(--color-sand);
+  background: var(--color-cream);
   color: var(--color-ink);
   font-family: var(--font-body);
 }
@@ -49,8 +80,8 @@ body {
   width: 9.5rem;
   height: 9.5rem;
   border-radius: 9999px;
-  border: 4px solid var(--color-sand);
-  box-shadow: 0 0 0 3px var(--color-ring), 0 12px 28px -8px rgba(43, 36, 32, 0.35);
+  border: 4px solid var(--color-cream);
+  box-shadow: 0 0 0 3px var(--color-ring), 0 12px 28px -8px rgba(42, 33, 24, 0.25);
   overflow: hidden;
   background: var(--color-card);
 }
@@ -64,7 +95,7 @@ body {
   width: 1.6rem;
   height: 1.1rem;
   border-radius: 9999px;
-  border: 4px solid var(--color-sand);
+  border: 4px solid var(--color-cream);
   background: transparent;
   box-shadow: 0 0 0 3px var(--color-ring);
   z-index: 2;
