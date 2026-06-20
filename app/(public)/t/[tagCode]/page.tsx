@@ -51,7 +51,7 @@ export default async function PublicScanPage({
   await recordScanEvent({ tagId: tag.id, petId: pet.id, eventType: "SCAN" });
 
   const showLost = settings?.showLostStatus !== false && pet.isLost;
-  const primaryPhone = pet.emergencyPhone;
+  const primaryPhone = settings?.showEmergencyPhone !== false ? pet.emergencyPhone : null;
 
   return (
     <main className="min-h-screen bg-[var(--color-cream)]">

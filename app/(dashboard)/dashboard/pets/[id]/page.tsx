@@ -47,13 +47,15 @@ export default async function EditPetPage({
         <h1 className="text-3xl font-bold text-[var(--color-orange)]" style={{ fontFamily: "var(--font-display)" }}>
           {pet.name}
         </h1>
-        <a
-          href={`/t/${pet.tags[0]?.tagCode ?? ""}`}
-          target="_blank"
-          className="text-sm text-[var(--color-ink-soft)] underline"
-        >
-          Voir la page publique →
-        </a>
+        {pet.tags[0]?.tagCode && (
+          <a
+            href={`/t/${pet.tags[0].tagCode}`}
+            target="_blank"
+            className="text-sm text-[var(--color-ink-soft)] underline"
+          >
+            Voir la page publique →
+          </a>
+        )}
       </div>
 
       {saved === "1" && (
