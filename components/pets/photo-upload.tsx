@@ -4,7 +4,7 @@ import { useState, useRef } from "react";
 import Image from "next/image";
 
 const CLOUD_NAME = "dbvawpfnt";
-const UPLOAD_PRESET = "toutou_photos";
+const UPLOAD_PRESET = "Unsigned";
 
 export function PhotoUpload({
   currentUrl,
@@ -41,12 +41,15 @@ export function PhotoUpload({
         `https://api.cloudinary.com/v1_1/${CLOUD_NAME}/image/upload`,
         { method: "POST", body: formData }
       );
-      if (!res.ok) throw new Error("Erreur Cloudinary");
       const data = await res.json();
+      if (!res.ok || data.error) {
+        throw new Error(data.error?.message ?? "Erreur Cloudinary");
+      }
       const url: string = data.secure_url;
       setPreview(url);
       onUpload(url);
-    } catch {
+    } catch (err) {
+      console.error("[PhotoUpload]", err);
       setError("L'upload a échoué. Réessaie.");
     } finally {
       setUploading(false);

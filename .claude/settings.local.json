@@ -35,7 +35,8 @@
       "WebFetch(domain:www.lecarnetdemontoutou.fr)",
       "mcp__Claude_in_Chrome__navigate",
       "mcp__Claude_in_Chrome__tabs_context_mcp",
-      "Bash(sed -i '' 's/className=\"font-\\\\[var\\(--font-display\\)\\\\] text-2xl font-semibold italic\"/className=\"text-3xl font-bold text-[var\\(--color-orange\\)]\" style={{ fontFamily: \"var\\(--font-display\\)\" }}/g' \\\\ *)"
+      "Bash(sed -i '' 's/className=\"font-\\\\[var\\(--font-display\\)\\\\] text-2xl font-semibold italic\"/className=\"text-3xl font-bold text-[var\\(--color-orange\\)]\" style={{ fontFamily: \"var\\(--font-display\\)\" }}/g' \\\\ *)",
+      "Bash(curl -s -X POST https://api.cloudinary.com/v1_1/dbvawpfnt/image/upload -F upload_preset=Unsigned -F file=@/tmp/test.png)"
     ]
   }
 }
