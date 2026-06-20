@@ -4,6 +4,7 @@ import { activationSchema } from "@/lib/validators/schemas";
 import { requireUser } from "@/lib/permissions/guards";
 import { activateTag } from "@/server/services/activation.service";
 import { petRepository } from "@/server/repositories/pet.repository";
+import { tagRepository } from "@/server/repositories/tag.repository";
 import { revalidatePath } from "next/cache";
 
 export type ActivateTagFormState = {
@@ -43,8 +44,7 @@ export async function activateTagAction(
 
   // On valide le code d'activation AVANT de créer un éventuel nouveau chien
   // pour éviter de laisser des fiches orphelines en cas de code invalide.
-  const { tagRepository: tr } = await import("@/server/repositories/tag.repository");
-  const tag = await tr.findByActivationCode(parsed.data.activationCode);
+  const tag = await tagRepository.findByActivationCode(parsed.data.activationCode);
   if (!tag) {
     return { status: "error", message: "Ce code d'activation n'existe pas. Vérifie la saisie." };
   }
