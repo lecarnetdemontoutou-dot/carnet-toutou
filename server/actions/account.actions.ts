@@ -2,6 +2,7 @@
 
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
+import { cookies } from "next/headers";
 import { requireUser } from "@/lib/permissions/guards";
 import { prisma } from "@/lib/db/client";
 
@@ -27,6 +28,10 @@ export async function deleteAccountAction() {
 
   // Supprime l'utilisateur en cascade (sessions, pets, tags, scan events via Prisma/PG)
   await prisma.user.delete({ where: { id: user.id } });
+
+  // Efface le cookie de session pour éviter une redirection en boucle
+  const cookieStore = await cookies();
+  cookieStore.delete("better-auth.session_token");
 
   redirect("/");
 }

@@ -71,6 +71,6 @@ export async function activateTagAction(
     return { status: "error", message: "Une erreur inattendue est survenue. Contacte le support." };
   }
 
-  revalidatePath("/dashboard/tags");
+  revalidatePath("/dashboard/pets");
   return { status: "success", petId: result.petId };
 }
