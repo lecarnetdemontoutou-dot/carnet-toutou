@@ -18,8 +18,8 @@ export function ActivateForm({ existingPets }: { existingPets: ExistingPet[] }) 
     initialState
   );
 
-  if (state.status === "success") {
-    router.push("/activate/success");
+  if (state.status === "success" && state.petId) {
+    router.push(`/dashboard/pets/${state.petId}?activated=1`);
   }
 
   return (

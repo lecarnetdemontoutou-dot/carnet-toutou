@@ -16,10 +16,10 @@ export default async function EditPetPage({
   searchParams,
 }: {
   params: Promise<{ id: string }>;
-  searchParams: Promise<{ saved?: string }>;
+  searchParams: Promise<{ saved?: string; activated?: string }>;
 }) {
   const { id } = await params;
-  const { saved } = await searchParams;
+  const { saved, activated } = await searchParams;
   const user = await requireUser();
   const pet = await petRepository.findById(id);
 
@@ -58,6 +58,11 @@ export default async function EditPetPage({
         )}
       </div>
 
+      {activated === "1" && (
+        <div className="rounded-2xl bg-[var(--color-orange)]/10 px-5 py-4 text-sm font-medium text-[var(--color-ink)]">
+          🎉 Médaille activée ! Complète la fiche de {pet.name} pour que les bonnes personnes puissent te contacter.
+        </div>
+      )}
       {saved === "1" && (
         <div className="rounded-2xl bg-[var(--color-green)]/30 px-5 py-3 text-sm font-medium text-[var(--color-ink)]">
           ✓ Modifications enregistrées
