@@ -78,14 +78,14 @@ export default async function EditPetPage({
       )}
 
       <div className="rounded-2xl border border-[var(--color-alert)]/30 bg-[var(--color-alert-soft)] p-5">
-        <p className="font-semibold text-[var(--color-ink)]">Zone dangereuse</p>
+        <p className="font-semibold text-[var(--color-ink)]">Retirer ce chien de mon compte</p>
         <p className="mt-1 text-sm text-[var(--color-ink-soft)]">
-          Supprimer définitivement la fiche de {pet.name} et toutes ses données.
+          Supprime définitivement la fiche de {pet.name} et toutes ses données.
         </p>
         <DeleteForm
           action={handleDelete}
-          confirmMessage={`Supprimer ${pet.name} ? Cette action est irréversible.`}
-          label={`Supprimer ${pet.name}`}
+          confirmMessage={`Retirer ${pet.name} de ton compte ? Cette action est irréversible.`}
+          label={`Retirer ${pet.name}`}
         />
       </div>
     </div>
