@@ -174,6 +174,15 @@ export default async function PublicScanPage({
         <p className="mt-8 text-center text-xs text-[var(--color-ink-soft)]">
           Merci de prendre soin de {pet.name} 🐾
         </p>
+
+        <div className="mt-6 text-center">
+          <a
+            href={`/login?redirectTo=/dashboard/pets/${pet.id}`}
+            className="text-xs text-[var(--color-ink-soft)]/50 hover:text-[var(--color-ink-soft)] transition underline underline-offset-2"
+          >
+            C&apos;est mon chien
+          </a>
+        </div>
       </div>
     </main>
   );
