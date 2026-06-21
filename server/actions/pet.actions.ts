@@ -3,7 +3,7 @@
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { requireUser, assertOwnsPet } from "@/lib/permissions/guards";
-import { petFormSchema, publicProfileSettingsSchema } from "@/lib/validators/schemas";
+import { petFormSchema } from "@/lib/validators/schemas";
 import { petRepository } from "@/server/repositories/pet.repository";
 import { prisma } from "@/lib/db/client";
 
@@ -73,35 +73,6 @@ export async function setLostStatusAction(petId: string, isLost: boolean) {
 
   await petRepository.setLostStatus(petId, isLost);
   revalidatePath(`/dashboard/pets/${petId}`);
-}
-
-export async function updateVisibilitySettingsAction(
-  petId: string,
-  formData: FormData
-) {
-  const user = await requireUser();
-  const pet = await petRepository.findById(petId);
-  if (!pet) throw new Error("NOT_FOUND");
-  assertOwnsPet(user.id, pet.userId);
-
-  const data = publicProfileSettingsSchema.parse({
-    showEmergencyPhone: formData.get("showEmergencyPhone") === "on",
-    showSecondaryPhone: formData.get("showSecondaryPhone") === "on",
-    showEmail: formData.get("showEmail") === "on",
-    showAddress: formData.get("showAddress") === "on",
-    showMedicalNotes: formData.get("showMedicalNotes") === "on",
-    showBehaviorNotes: formData.get("showBehaviorNotes") === "on",
-    showVetInfo: formData.get("showVetInfo") === "on",
-    showLostStatus: formData.get("showLostStatus") === "on",
-  });
-
-  await prisma.publicProfileSettings.update({
-    where: { petId },
-    data,
-  });
-
-  revalidatePath(`/dashboard/pets/${petId}`);
-  redirect(`/dashboard/pets/${petId}?saved=1`);
 }
 
 export async function deletePetAction(petId: string) {
