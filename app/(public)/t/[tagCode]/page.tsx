@@ -73,27 +73,30 @@ export default async function PublicScanPage({
         </div>
       )}
 
-      <div className="mx-auto max-w-md px-5 pb-12 pt-8">
-        {/* Hero : médaille + nom */}
-        <div className="flex flex-col items-center text-center">
-          <div className="medallion">
-            {pet.photoUrl ? (
-              <Image
-                src={pet.photoUrl}
-                alt={pet.name}
-                fill
-                className="object-cover"
-                sizes="152px"
-              />
-            ) : (
-              <div className="flex h-full w-full items-center justify-center text-5xl">
-                🐶
-              </div>
-            )}
-          </div>
+      {/* Photo hero pleine largeur */}
+      {pet.photoUrl ? (
+        <div className="relative h-64 w-full overflow-hidden">
+          <Image
+            src={pet.photoUrl}
+            alt={pet.name}
+            fill
+            className="object-cover"
+            sizes="100vw"
+            priority
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-[var(--color-cream)] to-transparent" />
+        </div>
+      ) : (
+        <div className="flex h-40 w-full items-center justify-center bg-[var(--color-orange)]/10 text-7xl">
+          🐶
+        </div>
+      )}
 
+      <div className="mx-auto max-w-md px-5 pb-12">
+        {/* Nom */}
+        <div className="text-center" style={{ marginTop: pet.photoUrl ? "-2rem" : "2rem" }}>
           <h1
-            className="mt-5 text-4xl font-bold text-[var(--color-orange)]"
+            className="text-4xl font-bold text-[var(--color-orange)]"
             style={{ fontFamily: "var(--font-display)" }}
           >
             {pet.name}
