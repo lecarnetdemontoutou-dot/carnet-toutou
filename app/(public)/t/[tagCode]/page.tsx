@@ -61,7 +61,7 @@ export default async function PublicScanPage({
           className="text-lg font-bold text-white"
           style={{ fontFamily: "var(--font-display)" }}
         >
-          Le Carnet de mon Toutou 🐾
+          La médaille de mon toutou 🐶
         </span>
       </div>
 

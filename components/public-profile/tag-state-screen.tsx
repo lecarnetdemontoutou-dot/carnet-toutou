@@ -8,7 +8,7 @@ export function TagStateScreen({ title, description }: Props) {
     <main className="min-h-screen bg-[var(--color-cream)]">
       <div className="bg-[var(--color-orange)] px-5 py-3 text-center">
         <span className="text-lg font-bold text-white" style={{ fontFamily: "var(--font-display)" }}>
-          Le Carnet de mon Toutou 🐾
+          La médaille de mon toutou 🐶
         </span>
       </div>
       <div className="flex flex-col items-center justify-center px-6 py-20 text-center">

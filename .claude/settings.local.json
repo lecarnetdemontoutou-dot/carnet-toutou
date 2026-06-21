@@ -44,7 +44,8 @@
       "Bash(curl -sk https://app.lecarnetdemontoutou.fr -o /dev/null -w \"%{http_code}\")",
       "Bash(git rm *)",
       "Bash(curl -sv https://app.lecarnetdemontoutou.fr)",
-      "Bash(grep -E '\\\\.\\(ts|tsx\\)$')"
+      "Bash(grep -E '\\\\.\\(ts|tsx\\)$')",
+      "Bash(xargs sed -i '' 's/Le Carnet de mon Toutou 🐾/La médaille de mon toutou 🐶/g')"
     ]
   }
 }

@@ -19,7 +19,7 @@ export default async function AdminLayout({ children }: { children: React.ReactN
         <div className="mx-auto flex max-w-5xl items-center justify-between px-5 py-3">
           <Link href="/admin">
             <span className="text-xl font-bold text-white" style={{ fontFamily: "var(--font-display)" }}>
-              Le Carnet de mon Toutou 🐾
+              La médaille de mon toutou 🐶
             </span>
           </Link>
           <div className="flex items-center gap-3">

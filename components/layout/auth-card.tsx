@@ -18,7 +18,7 @@ export function AuthCard({
             className="text-2xl font-bold text-white"
             style={{ fontFamily: "var(--font-display)" }}
           >
-            Le Carnet de mon Toutou 🐾
+            La médaille de mon toutou 🐶
           </span>
         </a>
       </div>
