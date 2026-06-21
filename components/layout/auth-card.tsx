@@ -43,7 +43,6 @@ export function AuthCard({
           <div className="rounded-3xl bg-white p-6 shadow-sm">{children}</div>
         </div>
       </div>
-      <MarqueeBanner />
     </main>
   );
 }

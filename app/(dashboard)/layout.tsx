@@ -59,7 +59,6 @@ export default async function DashboardLayout({
       </header>
 
       <main className="mx-auto max-w-4xl px-5 py-8">{children}</main>
-      <MarqueeBanner />
     </div>
   );
 }

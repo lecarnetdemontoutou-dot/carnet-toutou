@@ -185,7 +185,6 @@ export default async function PublicScanPage({
           </a>
         </div>
       </div>
-      <MarqueeBanner />
     </main>
   );
 }

@@ -37,7 +37,6 @@ export default async function AdminLayout({ children }: { children: React.ReactN
         </nav>
       </header>
       <main className="mx-auto max-w-5xl px-5 py-8">{children}</main>
-      <MarqueeBanner />
     </div>
   );
 }

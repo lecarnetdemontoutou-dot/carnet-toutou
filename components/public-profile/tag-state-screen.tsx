@@ -24,7 +24,6 @@ export function TagStateScreen({ title, description }: Props) {
           {description}
         </p>
       </div>
-      <MarqueeBanner />
     </main>
   );
 }
