@@ -26,6 +26,7 @@ export const petFormSchema = z.object({
   vetPhone: z.string().trim().optional(),
   medicalNotes: z.string().trim().optional(),
   behaviorNotes: z.string().trim().optional(),
+  distinctiveFeatures: z.string().trim().optional(),
   emergencyInstructions: z.string().trim().optional(),
 });
 

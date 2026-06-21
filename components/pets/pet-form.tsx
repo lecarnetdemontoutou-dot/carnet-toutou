@@ -64,6 +64,7 @@ export function PetForm({
         <Field label="Téléphone du vétérinaire" name="vetPhone" type="tel" defaultValue={pet?.vetPhone ?? ""} />
         <TextAreaField label="Notes médicales" name="medicalNotes" defaultValue={pet?.medicalNotes ?? ""} />
         <TextAreaField label="Notes comportementales" name="behaviorNotes" defaultValue={pet?.behaviorNotes ?? ""} />
+        <TextAreaField label="Signes distinctifs" name="distinctiveFeatures" defaultValue={pet?.distinctiveFeatures ?? ""} />
         <TextAreaField
           label="Consignes en cas d'urgence"
           name="emergencyInstructions"

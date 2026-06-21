@@ -123,6 +123,7 @@ model Pet {
   vetPhone              String?
   medicalNotes          String?
   behaviorNotes         String?
+  distinctiveFeatures   String?
   emergencyInstructions String?
 
   // Statut "perdu"

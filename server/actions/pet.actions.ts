@@ -25,6 +25,7 @@ function readPetFormData(formData: FormData) {
     vetPhone: formData.get("vetPhone") || undefined,
     medicalNotes: formData.get("medicalNotes") || undefined,
     behaviorNotes: formData.get("behaviorNotes") || undefined,
+    distinctiveFeatures: formData.get("distinctiveFeatures") || undefined,
     emergencyInstructions: formData.get("emergencyInstructions") || undefined,
   });
 }
