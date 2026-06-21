@@ -37,7 +37,7 @@ export default async function PublicScanPage({
   }
 
   if (tag.status === "UNASSIGNED" || !tag.pet) {
-    redirect(`/register?code=${tag.activationCode}`);
+    redirect("/register");
   }
 
   const pet = tag.pet;
