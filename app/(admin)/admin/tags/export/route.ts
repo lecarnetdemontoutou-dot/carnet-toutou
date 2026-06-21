@@ -16,7 +16,7 @@ export async function GET() {
     ["N°", "URL NFC (à programmer sur la puce)", "Code d'activation (pré-rempli dans l'URL)", "Créée le"],
     ...tags.map((t, i) => [
       String(i + 1),
-      `${baseUrl}/activate?code=${t.activationCode}`,
+      `${baseUrl}/register?code=${t.activationCode}`,
       t.activationCode,
       t.createdAt.toISOString().slice(0, 10),
     ]),

@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { signUp } from "@/lib/auth/auth-client";
 
-export function RegisterForm() {
+export function RegisterForm({ activationCode }: { activationCode?: string }) {
   const router = useRouter();
   const [error, setError] = useState<string | null>(null);
   const [pending, setPending] = useState(false);
@@ -31,7 +31,7 @@ export function RegisterForm() {
       setError(authError.message ?? "Impossible de créer le compte.");
       return;
     }
-    router.push("/activate");
+    router.push(activationCode ? `/activate?code=${activationCode}` : "/dashboard");
   }
 
   return (
@@ -52,7 +52,7 @@ export function RegisterForm() {
       </button>
       <p className="text-center text-sm text-[var(--color-ink-soft)]">
         Déjà un compte ?{" "}
-        <a href="/login" className="underline">
+        <a href={activationCode ? `/login?redirectTo=${encodeURIComponent(`/activate?code=${activationCode}`)}` : "/login"} className="underline">
           Se connecter
         </a>
       </p>
