@@ -1,4 +1,4 @@
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import Image from "next/image";
 import { tagRepository } from "@/server/repositories/tag.repository";
 import { recordScanEvent } from "@/server/services/tracking.service";
@@ -37,12 +37,7 @@ export default async function PublicScanPage({
   }
 
   if (tag.status === "UNASSIGNED" || !tag.pet) {
-    return (
-      <TagStateScreen
-        title="Médaille pas encore activée"
-        description="Cette médaille n'a pas encore été reliée à un chien."
-      />
-    );
+    redirect(`/register?code=${tag.activationCode}`);
   }
 
   const pet = tag.pet;
