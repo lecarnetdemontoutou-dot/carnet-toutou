@@ -25,7 +25,7 @@ function AccordionItem({
   text: string;
   emphasis?: boolean;
 }) {
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(true);
 
   return (
     <div
