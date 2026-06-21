@@ -9,12 +9,14 @@ export default async function HomePage() {
     <main className="flex min-h-screen flex-col bg-[var(--color-cream)]">
       {/* Header orange */}
       <header className="bg-[var(--color-orange)] px-6 py-4 text-center">
-        <span
-          className="text-2xl font-bold text-white"
-          style={{ fontFamily: "var(--font-display)" }}
-        >
-          La médaille de mon toutou 🐶
-        </span>
+        <a href={user ? "/dashboard" : "/"}>
+          <span
+            className="text-2xl font-bold text-white"
+            style={{ fontFamily: "var(--font-display)" }}
+          >
+            La médaille de mon toutou 🐶
+          </span>
+        </a>
       </header>
 
       {/* Hero */}
