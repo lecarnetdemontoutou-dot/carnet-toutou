@@ -9,7 +9,7 @@ export default function HomePage() {
           className="text-2xl font-bold text-white"
           style={{ fontFamily: "var(--font-display)" }}
         >
-          Le Carnet de mon Toutou 🐾
+          La médaille de mon toutou 🐶
         </span>
       </header>
 
@@ -21,14 +21,12 @@ export default function HomePage() {
           className="mt-4 text-4xl font-bold text-[var(--color-orange)] sm:text-5xl"
           style={{ fontFamily: "var(--font-display)" }}
         >
-          La médaille connectée
-          <br />
-          de ton toutou
+          Merci pour ton achat
         </h1>
 
         <p className="mt-4 max-w-md text-[var(--color-ink-soft)]">
-          Scanne la médaille, contacte le propriétaire instantanément.
-          Simple, rapide, efficace.
+          Ici tu pourras configurer la médaille de ton toutou en quelques clics seulement.
+          Simple, rapide &amp; efficace.
         </p>
 
         <div className="mt-8 flex flex-wrap justify-center gap-3">
@@ -45,6 +43,13 @@ export default function HomePage() {
             Se connecter →
           </Link>
         </div>
+
+        <p className="mt-8 text-sm text-[var(--color-ink-soft)]">
+          Retrouve toutes les infos sur{" "}
+          <a href="https://www.lecarnetdemontoutou.fr" target="_blank" rel="noopener noreferrer" className="underline hover:text-[var(--color-orange)]">
+            www.lecarnetdemontoutou.fr
+          </a>
+        </p>
 
       </div>
 
