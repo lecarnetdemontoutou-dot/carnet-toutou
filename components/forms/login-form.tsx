@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { signIn } from "@/lib/auth/auth-client";
 
-export function LoginForm() {
+export function LoginForm({ redirectTo }: { redirectTo?: string }) {
   const router = useRouter();
   const [error, setError] = useState<string | null>(null);
   const [pending, setPending] = useState(false);
@@ -25,7 +25,7 @@ export function LoginForm() {
       setError("Email ou mot de passe incorrect.");
       return;
     }
-    router.push("/dashboard");
+    router.push(redirectTo ?? "/dashboard");
   }
 
   return (

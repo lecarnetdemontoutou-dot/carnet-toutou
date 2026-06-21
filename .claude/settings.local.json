@@ -46,7 +46,8 @@
       "Bash(curl -sv https://app.lecarnetdemontoutou.fr)",
       "Bash(grep -E '\\\\.\\(ts|tsx\\)$')",
       "Bash(xargs sed -i '' 's/Le Carnet de mon Toutou 🐾/La médaille de mon toutou 🐶/g')",
-      "Bash(DATABASE_URL=\"postgresql://neondb_owner:npg_o12cGRHTKNvM@ep-sweet-salad-ai68mzrw.c-4.us-east-1.aws.neon.tech/neondb?sslmode=require\" npx prisma generate)"
+      "Bash(DATABASE_URL=\"postgresql://neondb_owner:npg_o12cGRHTKNvM@ep-sweet-salad-ai68mzrw.c-4.us-east-1.aws.neon.tech/neondb?sslmode=require\" npx prisma generate)",
+      "Bash(xargs ls -la)"
     ]
   }
 }
