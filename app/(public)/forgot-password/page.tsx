@@ -7,16 +7,23 @@ import { authClient } from "@/lib/auth/auth-client";
 export default function ForgotPasswordPage() {
   const [sent, setSent] = useState(false);
   const [pending, setPending] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setPending(true);
+    setError(null);
     const email = new FormData(e.currentTarget).get("email") as string;
-    await authClient.requestPasswordReset({
+    const result = await authClient.requestPasswordReset({
       email,
       redirectTo: `${window.location.origin}/reset-password`,
     });
+    console.log("[forgot-password] result:", JSON.stringify(result));
     setPending(false);
+    if (result?.error) {
+      setError(JSON.stringify(result.error));
+      return;
+    }
     setSent(true);
   }
 
@@ -43,6 +50,7 @@ export default function ForgotPasswordPage() {
               className="mt-1 w-full rounded-xl border border-[var(--color-ring)] bg-white px-3 py-2.5 text-[var(--color-ink)] outline-none focus:border-[var(--color-clay)]"
             />
           </div>
+          {error && <p className="text-sm text-red-500">{error}</p>}
           <button
             type="submit"
             disabled={pending}

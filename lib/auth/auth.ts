@@ -18,6 +18,7 @@ export const auth = betterAuth({
     enabled: true,
     requireEmailVerification: false,
     sendResetPassword: async ({ user, url }) => {
+      console.log("[reset-password] Envoi email à:", user.email, "url:", url);
       await sendEmail({
         to: user.email,
         subject: "Réinitialisation de ton mot de passe 🐾",
