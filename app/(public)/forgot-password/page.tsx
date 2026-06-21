@@ -12,7 +12,7 @@ export default function ForgotPasswordPage() {
     const email = new FormData(e.currentTarget).get("email") as string;
     await authClient.requestPasswordReset({
       email,
-      redirectTo: "/login",
+      redirectTo: `${window.location.origin}/reset-password`,
     });
     setSent(true);
   }
