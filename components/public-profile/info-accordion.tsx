@@ -29,18 +29,18 @@ function AccordionItem({
 
   return (
     <div
-      className={`overflow-hidden rounded-2xl ${emphasis ? "bg-[var(--color-alert-soft)]" : "bg-white"}`}
+      className={`overflow-hidden rounded-2xl ${emphasis ? "bg-red-600" : "bg-white"}`}
     >
       <button
         type="button"
         onClick={() => setOpen((v) => !v)}
         className="flex w-full items-center justify-between px-4 py-3.5 text-left"
       >
-        <span className="text-xs font-bold uppercase tracking-wide text-[var(--color-ink-soft)]">
+        <span className={`text-xs font-bold uppercase tracking-wide ${emphasis ? "text-white" : "text-[var(--color-ink-soft)]"}`}>
           {label}
         </span>
         <span
-          className="ml-3 text-[var(--color-ink-soft)] transition-transform duration-200"
+          className={`ml-3 transition-transform duration-200 ${emphasis ? "text-white" : "text-[var(--color-ink-soft)]"}`}
           style={{ transform: open ? "rotate(180deg)" : "rotate(0deg)" }}
         >
           ▾
@@ -48,8 +48,8 @@ function AccordionItem({
       </button>
 
       {open && (
-        <div className="border-t border-black/5 px-4 pb-4 pt-3">
-          <p className="text-[var(--color-ink)]">{text}</p>
+        <div className={`border-t px-4 pb-4 pt-3 ${emphasis ? "border-white/20" : "border-black/5"}`}>
+          <p className={emphasis ? "text-white" : "text-[var(--color-ink)]"}>{text}</p>
         </div>
       )}
     </div>

@@ -144,12 +144,12 @@ export default async function PublicScanPage({
 
             <InfoAccordion
               items={[
-                pet.behaviorNotes ? { label: "Comportement", text: pet.behaviorNotes } : null,
-                pet.distinctiveFeatures ? { label: "Signes distinctifs", text: pet.distinctiveFeatures } : null,
-                pet.medicalNotes ? { label: "Informations médicales", text: pet.medicalNotes, emphasis: true } : null,
                 pet.emergencyInstructions ? { label: "Consignes d'urgence", text: pet.emergencyInstructions, emphasis: true } : null,
-                pet.address ? { label: "Adresse du domicile", text: pet.address } : null,
+                pet.medicalNotes ? { label: "Informations médicales", text: pet.medicalNotes, emphasis: true } : null,
                 pet.vetName ? { label: "Vétérinaire", text: `${pet.vetName}${pet.vetPhone ? ` — ${pet.vetPhone}` : ""}` } : null,
+                pet.distinctiveFeatures ? { label: "Signes distinctifs", text: pet.distinctiveFeatures } : null,
+                pet.behaviorNotes ? { label: "Comportement", text: pet.behaviorNotes } : null,
+                pet.address ? { label: "Adresse du domicile", text: pet.address } : null,
               ].filter(Boolean) as { label: string; text: string; emphasis?: boolean }[]}
             />
           </div>
