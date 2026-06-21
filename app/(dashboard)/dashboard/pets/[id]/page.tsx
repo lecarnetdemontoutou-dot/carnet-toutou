@@ -3,12 +3,7 @@ import { requireUser, assertOwnsPet } from "@/lib/permissions/guards";
 import { petRepository } from "@/server/repositories/pet.repository";
 import { PetForm } from "@/components/pets/pet-form";
 import { LostModeSwitch } from "@/components/pets/lost-mode-switch";
-import { VisibilitySettingsForm } from "@/components/pets/visibility-settings-form";
-import {
-  updatePetAction,
-  updateVisibilitySettingsAction,
-  deletePetAction,
-} from "@/server/actions/pet.actions";
+import { updatePetAction, deletePetAction } from "@/server/actions/pet.actions";
 import { DeleteForm } from "@/components/ui/delete-form";
 
 export default async function EditPetPage({
@@ -29,11 +24,6 @@ export default async function EditPetPage({
   async function handleUpdate(formData: FormData) {
     "use server";
     await updatePetAction(id, formData);
-  }
-
-  async function handleVisibility(formData: FormData) {
-    "use server";
-    await updateVisibilitySettingsAction(id, formData);
   }
 
   async function handleDelete() {
@@ -76,13 +66,6 @@ export default async function EditPetPage({
         action={handleUpdate}
         submitLabel="Enregistrer les modifications"
       />
-
-      {pet.publicSettings && (
-        <VisibilitySettingsForm
-          settings={pet.publicSettings}
-          action={handleVisibility}
-        />
-      )}
 
       <div className="rounded-2xl border border-[var(--color-alert)]/30 bg-[var(--color-alert-soft)] p-5">
         <p className="font-semibold text-[var(--color-ink)]">Retirer ce chien de mon compte</p>

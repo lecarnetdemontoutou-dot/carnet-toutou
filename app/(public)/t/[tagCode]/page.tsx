@@ -47,12 +47,10 @@ export default async function PublicScanPage({
   }
 
   const pet = tag.pet;
-  const settings = pet.publicSettings;
 
   await recordScanEvent({ tagId: tag.id, petId: pet.id, eventType: "SCAN" });
 
-  const showLost = settings?.showLostStatus !== false && pet.isLost;
-  const primaryPhone = settings?.showEmergencyPhone !== false ? pet.emergencyPhone : null;
+  const primaryPhone = pet.emergencyPhone;
 
   return (
     <main className="min-h-screen bg-[var(--color-cream)]">
@@ -67,7 +65,7 @@ export default async function PublicScanPage({
       </div>
 
       {/* Bandeau alerte chien perdu */}
-      {showLost && (
+      {pet.isLost && (
         <div className="bg-[var(--color-ink)] px-5 py-3 text-center text-sm font-bold uppercase tracking-wide text-white">
           🚨 {pet.name} est porté disparu — merci d'appeler immédiatement
         </div>
@@ -137,13 +135,7 @@ export default async function PublicScanPage({
         </div>
 
         {/* Informations utiles */}
-        {(
-          (settings?.showBehaviorNotes && pet.behaviorNotes) ||
-          (settings?.showMedicalNotes && pet.medicalNotes) ||
-          pet.emergencyInstructions ||
-          (settings?.showAddress && pet.address) ||
-          (settings?.showVetInfo && pet.vetName)
-        ) && (
+        {(pet.behaviorNotes || pet.medicalNotes || pet.distinctiveFeatures || pet.emergencyInstructions || pet.address || pet.vetName) && (
           <div className="mt-8 space-y-3">
             <h2
               className="text-center text-xl font-bold text-[var(--color-orange)]"
@@ -152,19 +144,22 @@ export default async function PublicScanPage({
               À savoir sur {pet.name}
             </h2>
 
-            {settings?.showBehaviorNotes && pet.behaviorNotes && (
+            {pet.behaviorNotes && (
               <InfoBlock label="Comportement" text={pet.behaviorNotes} />
             )}
-            {settings?.showMedicalNotes && pet.medicalNotes && (
+            {pet.distinctiveFeatures && (
+              <InfoBlock label="Signes distinctifs" text={pet.distinctiveFeatures} />
+            )}
+            {pet.medicalNotes && (
               <InfoBlock label="Informations médicales" text={pet.medicalNotes} emphasis />
             )}
             {pet.emergencyInstructions && (
               <InfoBlock label="Consignes d'urgence" text={pet.emergencyInstructions} emphasis />
             )}
-            {settings?.showAddress && pet.address && (
+            {pet.address && (
               <InfoBlock label="Adresse du domicile" text={pet.address} />
             )}
-            {settings?.showVetInfo && pet.vetName && (
+            {pet.vetName && (
               <InfoBlock
                 label="Vétérinaire"
                 text={`${pet.vetName}${pet.vetPhone ? ` — ${pet.vetPhone}` : ""}`}
