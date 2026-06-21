@@ -17,7 +17,7 @@ export async function sendEmail({
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      sender: { name: "La médaille de mon toutou", email: "lecarnetdemontoutou@gmail.com" },
+      sender: { name: "La médaille de mon toutou", email: "hello@lecarnetdemontoutou.fr" },
       to: [{ email: to }],
       subject,
       htmlContent: html,
