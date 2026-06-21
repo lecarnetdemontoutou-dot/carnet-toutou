@@ -34,6 +34,12 @@ export async function deleteTagAction(tagId: string) {
   revalidatePath("/admin/tags");
 }
 
+export async function deleteTagsAction(tagIds: string[]) {
+  await requireAdmin();
+  await prisma.tag.deleteMany({ where: { id: { in: tagIds } } });
+  revalidatePath("/admin/tags");
+}
+
 /** Génère un lot de nouvelles médailles UNASSIGNED, prêtes à être imprimées. */
 export async function createTagBatchAction(formData: FormData) {
   await requireAdmin();

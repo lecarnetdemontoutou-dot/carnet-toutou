@@ -1,6 +1,6 @@
 import { prisma } from "@/lib/db/client";
 import { createTagBatchAction } from "@/server/actions/admin-tag.actions";
-import { TagAdminActions } from "@/components/admin/tag-admin-actions";
+import { TagsTable } from "@/components/admin/tags-table";
 
 export default async function AdminTagsPage() {
   const tags = await prisma.tag.findMany({
@@ -36,34 +36,7 @@ export default async function AdminTagsPage() {
         </div>
       </div>
 
-      <div className="overflow-x-auto rounded-2xl bg-white/70">
-        <table className="w-full text-sm">
-          <thead>
-            <tr className="border-b border-[var(--color-ring)] text-left text-[var(--color-ink-soft)]">
-              <th className="px-4 py-3">tagCode</th>
-              <th className="px-4 py-3">activationCode</th>
-              <th className="px-4 py-3">Statut</th>
-              <th className="px-4 py-3">Propriétaire</th>
-              <th className="px-4 py-3">Chien</th>
-              <th className="px-4 py-3">Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {tags.map((tag) => (
-              <tr key={tag.id} className="border-b border-[var(--color-ring)]/50">
-                <td className="px-4 py-3 font-mono text-xs">{tag.tagCode}</td>
-                <td className="px-4 py-3 font-mono text-xs">{tag.activationCode}</td>
-                <td className="px-4 py-3">{tag.status}</td>
-                <td className="px-4 py-3">{tag.user ? `${tag.user.firstName} ${tag.user.lastName}` : "—"}</td>
-                <td className="px-4 py-3">{tag.pet?.name ?? "—"}</td>
-                <td className="px-4 py-3">
-                  <TagAdminActions tagId={tag.id} status={tag.status} />
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+      <TagsTable tags={tags} />
     </div>
   );
 }
