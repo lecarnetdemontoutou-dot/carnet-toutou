@@ -59,11 +59,19 @@ export default async function AdminHomePage() {
 
   return (
     <div className="space-y-8">
-      <div>
-        <h1 className="text-2xl font-semibold text-[var(--color-ink)]">Vue d'ensemble</h1>
-        <p className="text-sm text-[var(--color-ink-soft)]">
-          {now.toLocaleDateString("fr-FR", { weekday: "long", day: "numeric", month: "long", year: "numeric" })}
-        </p>
+      <div className="flex items-start justify-between gap-4">
+        <div>
+          <h1 className="text-2xl font-semibold text-[var(--color-ink)]">Vue d'ensemble</h1>
+          <p className="text-sm text-[var(--color-ink-soft)]">
+            {now.toLocaleDateString("fr-FR", { weekday: "long", day: "numeric", month: "long", year: "numeric" })}
+          </p>
+        </div>
+        <a
+          href="/admin/backup"
+          className="rounded-full border border-[var(--color-ring)] bg-white px-4 py-2 text-sm font-medium text-[var(--color-ink-soft)] hover:bg-[var(--color-sand)] transition"
+        >
+          ↓ Sauvegarder les données
+        </a>
       </div>
 
       {/* Alertes */}
