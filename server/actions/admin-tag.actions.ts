@@ -30,12 +30,16 @@ export async function reactivateTagAction(tagId: string) {
 
 export async function deleteTagAction(tagId: string) {
   await requireAdmin();
+  await prisma.scanEvent.deleteMany({ where: { tagId } });
+  await prisma.foundReport.deleteMany({ where: { tagId } });
   await prisma.tag.delete({ where: { id: tagId } });
   revalidatePath("/admin/tags");
 }
 
 export async function deleteTagsAction(tagIds: string[]) {
   await requireAdmin();
+  await prisma.scanEvent.deleteMany({ where: { tagId: { in: tagIds } } });
+  await prisma.foundReport.deleteMany({ where: { tagId: { in: tagIds } } });
   await prisma.tag.deleteMany({ where: { id: { in: tagIds } } });
   revalidatePath("/admin/tags");
 }
