@@ -77,25 +77,28 @@ export function PhotoUpload({
         onClick={() => inputRef.current?.click()}
         onDrop={handleDrop}
         onDragOver={(e) => e.preventDefault()}
-        className="relative flex cursor-pointer flex-col items-center justify-center gap-3 rounded-2xl border-2 border-dashed border-[var(--color-ring)] bg-white p-6 transition hover:border-[var(--color-orange)] hover:bg-orange-50/30"
+        className="flex cursor-pointer items-center gap-4 rounded-2xl border border-[var(--color-ring)] bg-white p-4 transition hover:border-[var(--color-orange)] hover:bg-orange-50/20"
       >
-        {preview ? (
-          <div className="relative h-28 w-28 overflow-hidden rounded-full border-4 border-white shadow-md">
-            <Image src={preview} alt="Photo du chien" fill className="object-cover" sizes="112px" />
-          </div>
-        ) : (
-          <div className="flex h-28 w-28 items-center justify-center rounded-full bg-[var(--color-card)] text-5xl">
-            🐶
-          </div>
-        )}
+        <div className="relative h-20 w-20 flex-shrink-0 overflow-hidden rounded-2xl bg-[var(--color-orange)]/10">
+          {preview ? (
+            <Image src={preview} alt="Photo du chien" fill className="object-cover" sizes="80px" />
+          ) : (
+            <div className="flex h-full w-full items-center justify-center text-3xl">🐶</div>
+          )}
+        </div>
 
-        {uploading ? (
-          <p className="text-sm font-medium text-[var(--color-orange)]">Upload en cours…</p>
-        ) : (
-          <p className="text-sm text-[var(--color-ink-soft)]">
-            {preview ? "Cliquer ou glisser pour changer la photo" : "Cliquer ou glisser une photo"}
-          </p>
-        )}
+        <div>
+          {uploading ? (
+            <p className="text-sm font-medium text-[var(--color-orange)]">Upload en cours…</p>
+          ) : (
+            <>
+              <p className="text-sm font-medium text-[var(--color-ink)]">
+                {preview ? "Changer la photo" : "Ajouter une photo"}
+              </p>
+              <p className="mt-0.5 text-xs text-[var(--color-ink-soft)]">Cliquer ou glisser une image · max 5 Mo</p>
+            </>
+          )}
+        </div>
 
         <input
           ref={inputRef}
