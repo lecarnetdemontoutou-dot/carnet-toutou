@@ -45,13 +45,3 @@ export const foundReportSchema = z.object({
   website: z.string().max(0).optional(),
 });
 
-export const publicProfileSettingsSchema = z.object({
-  showEmergencyPhone: z.boolean(),
-  showSecondaryPhone: z.boolean(),
-  showEmail: z.boolean(),
-  showAddress: z.boolean(),
-  showMedicalNotes: z.boolean(),
-  showBehaviorNotes: z.boolean(),
-  showVetInfo: z.boolean(),
-  showLostStatus: z.boolean(),
-});
