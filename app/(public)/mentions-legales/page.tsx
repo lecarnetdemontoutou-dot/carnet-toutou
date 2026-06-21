@@ -6,7 +6,7 @@ export default function LegalPage() {
       <div className="space-y-5 text-sm text-[var(--color-ink-soft)] leading-relaxed">
         <section>
           <h2 className="font-semibold text-[var(--color-ink)] mb-1">Éditeur</h2>
-          <p>Le Carnet de mon Toutou<br />Activité exercée en tant que particulier<br />Contact : lecarnetdemontoutou@gmail.com</p>
+          <p>La médaille de mon Toutou<br />Produit par Le Carnet de mon Toutou<br />Activité exercée en tant que particulier<br />Contact : lecarnetdemontoutou@gmail.com</p>
         </section>
 
         <section>
@@ -16,12 +16,12 @@ export default function LegalPage() {
 
         <section>
           <h2 className="font-semibold text-[var(--color-ink)] mb-1">Propriété intellectuelle</h2>
-          <p>L'ensemble du contenu de ce site (textes, visuels, identité graphique) est la propriété de Le Carnet de mon Toutou. Toute reproduction est interdite sans autorisation préalable.</p>
+          <p>L'ensemble du contenu de ce site (textes, visuels, identité graphique) est la propriété de La médaille de mon Toutou / Le Carnet de mon Toutou. Toute reproduction est interdite sans autorisation préalable.</p>
         </section>
 
         <section>
           <h2 className="font-semibold text-[var(--color-ink)] mb-1">Responsabilité</h2>
-          <p>Le Carnet de mon Toutou ne peut être tenu responsable en cas d'impossibilité temporaire d'accès au service, ni des conséquences liées à un usage inapproprié des données affichées sur les profils publics.</p>
+          <p>La médaille de mon Toutou ne peut être tenue responsable en cas d'impossibilité temporaire d'accès au service, ni des conséquences liées à un usage inapproprié des données affichées sur les profils publics.</p>
         </section>
       </div>
     </AuthCard>
