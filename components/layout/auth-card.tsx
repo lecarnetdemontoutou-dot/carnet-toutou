@@ -35,7 +35,7 @@ export function AuthCard({
               {title}
             </h1>
             {subtitle && (
-              <p className="mt-1 text-sm text-[var(--color-ink-soft)]">
+              <p className="mt-2 text-sm leading-relaxed text-[var(--color-ink-soft)]">
                 {subtitle}
               </p>
             )}
