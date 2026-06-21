@@ -5,7 +5,7 @@ import { recordScanEvent } from "@/server/services/tracking.service";
 import { TagStateScreen } from "@/components/public-profile/tag-state-screen";
 import { PublicActionButton } from "@/components/public-profile/public-action-button";
 import { FoundReportForm } from "@/components/public-profile/found-report-form";
-import { MarqueeBanner } from "@/components/layout/marquee-banner";
+import { InfoAccordion } from "@/components/public-profile/info-accordion";
 
 export const dynamic = "force-dynamic";
 
@@ -136,35 +136,24 @@ export default async function PublicScanPage({
 
         {/* Informations utiles */}
         {(pet.behaviorNotes || pet.medicalNotes || pet.distinctiveFeatures || pet.emergencyInstructions || pet.address || pet.vetName) && (
-          <div className="mt-8 space-y-3">
+          <div className="mt-8">
             <h2
-              className="text-center text-xl font-bold text-[var(--color-orange)]"
+              className="mb-3 text-center text-xl font-bold text-[var(--color-orange)]"
               style={{ fontFamily: "var(--font-display)" }}
             >
               À savoir sur {pet.name}
             </h2>
 
-            {pet.behaviorNotes && (
-              <InfoBlock label="Comportement" text={pet.behaviorNotes} />
-            )}
-            {pet.distinctiveFeatures && (
-              <InfoBlock label="Signes distinctifs" text={pet.distinctiveFeatures} />
-            )}
-            {pet.medicalNotes && (
-              <InfoBlock label="Informations médicales" text={pet.medicalNotes} emphasis />
-            )}
-            {pet.emergencyInstructions && (
-              <InfoBlock label="Consignes d'urgence" text={pet.emergencyInstructions} emphasis />
-            )}
-            {pet.address && (
-              <InfoBlock label="Adresse du domicile" text={pet.address} />
-            )}
-            {pet.vetName && (
-              <InfoBlock
-                label="Vétérinaire"
-                text={`${pet.vetName}${pet.vetPhone ? ` — ${pet.vetPhone}` : ""}`}
-              />
-            )}
+            <InfoAccordion
+              items={[
+                pet.behaviorNotes ? { label: "Comportement", text: pet.behaviorNotes } : null,
+                pet.distinctiveFeatures ? { label: "Signes distinctifs", text: pet.distinctiveFeatures } : null,
+                pet.medicalNotes ? { label: "Informations médicales", text: pet.medicalNotes, emphasis: true } : null,
+                pet.emergencyInstructions ? { label: "Consignes d'urgence", text: pet.emergencyInstructions, emphasis: true } : null,
+                pet.address ? { label: "Adresse du domicile", text: pet.address } : null,
+                pet.vetName ? { label: "Vétérinaire", text: `${pet.vetName}${pet.vetPhone ? ` — ${pet.vetPhone}` : ""}` } : null,
+              ].filter(Boolean) as { label: string; text: string; emphasis?: boolean }[]}
+            />
           </div>
         )}
 
@@ -182,24 +171,5 @@ export default async function PublicScanPage({
         </div>
       </div>
     </main>
-  );
-}
-
-function InfoBlock({
-  label,
-  text,
-  emphasis,
-}: {
-  label: string;
-  text: string;
-  emphasis?: boolean;
-}) {
-  return (
-    <div className={`rounded-2xl p-4 ${emphasis ? "bg-[var(--color-alert-soft)]" : "bg-white"}`}>
-      <p className="text-xs font-bold uppercase tracking-wide text-[var(--color-ink-soft)]">
-        {label}
-      </p>
-      <p className="mt-1 text-[var(--color-ink)]">{text}</p>
-    </div>
   );
 }
