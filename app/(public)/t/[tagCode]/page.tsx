@@ -4,7 +4,6 @@ import { tagRepository } from "@/server/repositories/tag.repository";
 import { recordScanEvent } from "@/server/services/tracking.service";
 import { TagStateScreen } from "@/components/public-profile/tag-state-screen";
 import { PublicActionButton } from "@/components/public-profile/public-action-button";
-import { FoundReportForm } from "@/components/public-profile/found-report-form";
 import { InfoAccordion } from "@/components/public-profile/info-accordion";
 
 export const dynamic = "force-dynamic";
@@ -131,7 +130,6 @@ export default async function PublicScanPage({
             </PublicActionButton>
           )}
 
-          <FoundReportForm tagCode={tagCode} petName={pet.name} />
         </div>
 
         {/* Informations utiles */}
