@@ -25,7 +25,7 @@ export default async function DashboardHomePage() {
           Bonjour {user.firstName ?? ""} 👋
         </h1>
         <p className="text-[var(--color-ink-soft)]">
-          Voici un aperçu de tes chiens et de tes médailles.
+          Bienvenue sur ton tableau de bord pour gérer tes médailles et tes chiens.
         </p>
       </div>
 
