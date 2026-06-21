@@ -66,7 +66,7 @@ export default async function PublicScanPage({
 
       {/* Bandeau alerte chien perdu */}
       {pet.isLost && (
-        <div className="bg-[var(--color-ink)] px-5 py-3 text-center text-sm font-bold uppercase tracking-wide text-white">
+        <div className="bg-red-600 px-5 py-4 text-center text-sm font-bold uppercase tracking-wide text-white">
           🚨 {pet.name} est porté disparu — merci d'appeler immédiatement
         </div>
       )}
