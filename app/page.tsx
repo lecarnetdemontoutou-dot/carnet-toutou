@@ -1,7 +1,10 @@
 import Link from "next/link";
 import { MarqueeBanner } from "@/components/layout/marquee-banner";
+import { getSession } from "@/lib/permissions/guards";
 
-export default function HomePage() {
+export default async function HomePage() {
+  const session = await getSession().catch(() => null);
+  const user = session?.user ?? null;
   return (
     <main className="flex min-h-screen flex-col bg-[var(--color-cream)]">
       {/* Header orange */}
@@ -31,18 +34,29 @@ export default function HomePage() {
         </p>
 
         <div className="mt-8 flex flex-wrap justify-center gap-3">
-          <Link
-            href="/register"
-            className="rounded-full bg-[var(--color-orange)] px-8 py-3.5 font-bold text-white shadow-sm transition hover:bg-[var(--color-orange-dark)] active:scale-[0.98]"
-          >
-            Créer mon compte
-          </Link>
-          <Link
-            href="/login"
-            className="rounded-full bg-[var(--color-blue)] px-8 py-3.5 font-bold text-white shadow-sm transition hover:bg-[var(--color-blue-dark)] active:scale-[0.98]"
-          >
-            Se connecter →
-          </Link>
+          {user ? (
+            <Link
+              href="/dashboard"
+              className="rounded-full bg-[var(--color-orange)] px-8 py-3.5 font-bold text-white shadow-sm transition hover:bg-[var(--color-orange-dark)] active:scale-[0.98]"
+            >
+              Mon tableau de bord →
+            </Link>
+          ) : (
+            <>
+              <Link
+                href="/register"
+                className="rounded-full bg-[var(--color-orange)] px-8 py-3.5 font-bold text-white shadow-sm transition hover:bg-[var(--color-orange-dark)] active:scale-[0.98]"
+              >
+                Créer mon compte
+              </Link>
+              <Link
+                href="/login"
+                className="rounded-full bg-[var(--color-blue)] px-8 py-3.5 font-bold text-white shadow-sm transition hover:bg-[var(--color-blue-dark)] active:scale-[0.98]"
+              >
+                Se connecter →
+              </Link>
+            </>
+          )}
         </div>
 
         <p className="mt-8 text-sm text-[var(--color-ink-soft)]">
