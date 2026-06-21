@@ -33,11 +33,11 @@ export default async function PetsListPage() {
               href={`/dashboard/pets/${pet.id}`}
               className="flex items-center gap-4 rounded-2xl bg-white/70 p-4 transition hover:bg-white"
             >
-              <div className="medallion !h-16 !w-16 flex-shrink-0">
+              <div className="relative h-16 w-16 flex-shrink-0 overflow-hidden rounded-2xl">
                 {pet.photoUrl ? (
                   <Image src={pet.photoUrl} alt={pet.name} fill className="object-cover" sizes="64px" />
                 ) : (
-                  <div className="flex h-full w-full items-center justify-center text-2xl">🐶</div>
+                  <div className="flex h-full w-full items-center justify-center rounded-2xl bg-[var(--color-orange)]/10 text-2xl">🐶</div>
                 )}
               </div>
               <div>
