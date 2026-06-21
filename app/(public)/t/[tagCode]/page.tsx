@@ -5,6 +5,7 @@ import { recordScanEvent } from "@/server/services/tracking.service";
 import { TagStateScreen } from "@/components/public-profile/tag-state-screen";
 import { PublicActionButton } from "@/components/public-profile/public-action-button";
 import { FoundReportForm } from "@/components/public-profile/found-report-form";
+import { MarqueeBanner } from "@/components/layout/marquee-banner";
 
 export const dynamic = "force-dynamic";
 
@@ -184,6 +185,7 @@ export default async function PublicScanPage({
           </a>
         </div>
       </div>
+      <MarqueeBanner />
     </main>
   );
 }

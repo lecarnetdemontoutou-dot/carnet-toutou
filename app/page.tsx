@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { MarqueeBanner } from "@/components/layout/marquee-banner";
 
 export default function HomePage() {
   return (
@@ -53,12 +54,7 @@ export default function HomePage() {
 
       </div>
 
-      {/* Ticker */}
-      <div className="overflow-hidden bg-[var(--color-ink)] py-3">
-        <p className="animate-marquee whitespace-nowrap text-sm font-bold uppercase tracking-widest text-white">
-          {"🐾 Dessiné à la main · Conçu pour les dogpawrents · For dog lovers only · Pour tout noter de nos toutous · 🐾 Dessiné à la main · Conçu pour les dogpawrents · For dog lovers only · "}
-        </p>
-      </div>
+      <MarqueeBanner />
     </main>
   );
 }

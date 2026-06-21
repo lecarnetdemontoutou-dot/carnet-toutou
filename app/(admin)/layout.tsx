@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { requireAdmin } from "@/lib/permissions/guards";
 import { SignOutButton } from "@/components/forms/sign-out-button";
+import { MarqueeBanner } from "@/components/layout/marquee-banner";
 
 const NAV = [
   { href: "/admin", label: "Vue d'ensemble" },
@@ -36,6 +37,7 @@ export default async function AdminLayout({ children }: { children: React.ReactN
         </nav>
       </header>
       <main className="mx-auto max-w-5xl px-5 py-8">{children}</main>
+      <MarqueeBanner />
     </div>
   );
 }

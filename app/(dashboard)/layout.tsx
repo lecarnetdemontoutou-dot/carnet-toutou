@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { requireUser } from "@/lib/permissions/guards";
 import { SignOutButton } from "@/components/forms/sign-out-button";
+import { MarqueeBanner } from "@/components/layout/marquee-banner";
 
 
 const NAV = [
@@ -58,6 +59,7 @@ export default async function DashboardLayout({
       </header>
 
       <main className="mx-auto max-w-4xl px-5 py-8">{children}</main>
+      <MarqueeBanner />
     </div>
   );
 }

@@ -1,3 +1,5 @@
+import { MarqueeBanner } from "@/components/layout/marquee-banner";
+
 type Props = {
   title: string;
   description: string;
@@ -22,6 +24,7 @@ export function TagStateScreen({ title, description }: Props) {
           {description}
         </p>
       </div>
+      <MarqueeBanner />
     </main>
   );
 }
