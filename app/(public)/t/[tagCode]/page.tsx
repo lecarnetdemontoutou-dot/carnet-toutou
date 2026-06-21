@@ -131,7 +131,7 @@ export default async function PublicScanPage({
             </PublicActionButton>
           )}
 
-          <FoundReportForm tagCode={tagCode} />
+          <FoundReportForm tagCode={tagCode} petName={pet.name} />
         </div>
 
         {/* Informations utiles */}

@@ -8,7 +8,7 @@ import {
 
 const initialState: FoundReportFormState = { status: "idle" };
 
-export function FoundReportForm({ tagCode }: { tagCode: string }) {
+export function FoundReportForm({ tagCode, petName }: { tagCode: string; petName: string }) {
   const [open, setOpen] = useState(false);
   const [state, formAction, pending] = useActionState(
     submitFoundReportAction,
@@ -22,8 +22,7 @@ export function FoundReportForm({ tagCode }: { tagCode: string }) {
           Merci infiniment 🐾
         </p>
         <p className="mt-1 text-sm text-[var(--color-ink-soft)]">
-          Le propriétaire va recevoir votre message. Restez si possible avec
-          le chien en attendant.
+          Les dogpawrents de {petName} vont recevoir votre message. Merci de rester avec {petName} en attendant leur réponse.
         </p>
       </div>
     );
