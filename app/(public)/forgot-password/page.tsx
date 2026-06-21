@@ -6,14 +6,17 @@ import { authClient } from "@/lib/auth/auth-client";
 
 export default function ForgotPasswordPage() {
   const [sent, setSent] = useState(false);
+  const [pending, setPending] = useState(false);
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    setPending(true);
     const email = new FormData(e.currentTarget).get("email") as string;
     await authClient.requestPasswordReset({
       email,
       redirectTo: `${window.location.origin}/reset-password`,
     });
+    setPending(false);
     setSent(true);
   }
 
@@ -42,9 +45,10 @@ export default function ForgotPasswordPage() {
           </div>
           <button
             type="submit"
-            className="w-full rounded-full bg-[var(--color-clay)] px-5 py-3 font-semibold text-white transition active:scale-[0.98]"
+            disabled={pending}
+            className="w-full rounded-full bg-[var(--color-clay)] px-5 py-3 font-semibold text-white transition active:scale-[0.98] disabled:opacity-60"
           >
-            Envoyer le lien
+            {pending ? "Envoi en cours…" : "Envoyer le lien"}
           </button>
         </form>
       )}
