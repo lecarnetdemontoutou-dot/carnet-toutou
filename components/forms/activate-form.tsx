@@ -11,7 +11,7 @@ const initialState: ActivateTagFormState = { status: "idle" };
 
 type ExistingPet = { id: string; name: string };
 
-export function ActivateForm({ existingPets }: { existingPets: ExistingPet[] }) {
+export function ActivateForm({ existingPets, prefillCode }: { existingPets: ExistingPet[]; prefillCode?: string }) {
   const router = useRouter();
   const [state, formAction, pending] = useActionState(
     activateTagAction,
@@ -32,7 +32,9 @@ export function ActivateForm({ existingPets }: { existingPets: ExistingPet[] }) 
           name="activationCode"
           required
           placeholder="ACT-9XK7PQ"
-          className="mt-1 w-full rounded-xl border border-[var(--color-ring)] bg-white px-3 py-2.5 uppercase tracking-wide text-[var(--color-ink)] outline-none focus:border-[var(--color-clay)]"
+          defaultValue={prefillCode ?? ""}
+          readOnly={!!prefillCode}
+          className="mt-1 w-full rounded-xl border border-[var(--color-ring)] bg-white px-3 py-2.5 uppercase tracking-wide text-[var(--color-ink)] outline-none focus:border-[var(--color-clay)] read-only:bg-[var(--color-sand)] read-only:text-[var(--color-ink-soft)]"
         />
         <p className="mt-1 text-xs text-[var(--color-ink-soft)]">
           Ce code se trouve sur la carte fournie avec ta médaille.

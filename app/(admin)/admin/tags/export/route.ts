@@ -13,10 +13,10 @@ export async function GET() {
 
   const baseUrl = "https://app.lecarnetdemontoutou.fr";
   const rows = [
-    ["N°", "URL NFC (à programmer sur la puce)", "Code d'activation (à glisser dans l'emballage)", "Créée le"],
+    ["N°", "URL NFC (à programmer sur la puce)", "Code d'activation (pré-rempli dans l'URL)", "Créée le"],
     ...tags.map((t, i) => [
       String(i + 1),
-      `${baseUrl}/t/${t.tagCode}`,
+      `${baseUrl}/activate?code=${t.activationCode}`,
       t.activationCode,
       t.createdAt.toISOString().slice(0, 10),
     ]),
