@@ -28,6 +28,20 @@ export async function reactivateTagAction(tagId: string) {
   revalidatePath("/admin/tags");
 }
 
+export async function resetTagAction(tagId: string) {
+  await requireAdmin();
+  await prisma.tag.update({
+    where: { id: tagId },
+    data: {
+      status: "UNASSIGNED",
+      userId: null,
+      petId: null,
+      activatedAt: null,
+    },
+  });
+  revalidatePath("/admin/tags");
+}
+
 export async function deleteTagAction(tagId: string) {
   await requireAdmin();
   await prisma.scanEvent.deleteMany({ where: { tagId } });
