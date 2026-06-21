@@ -24,7 +24,7 @@ export default async function DashboardLayout({
       {/* Barre de navigation orange */}
       <header className="bg-[var(--color-orange)]">
         <div className="mx-auto flex max-w-4xl items-center justify-between px-5 py-3">
-          <Link href="/">
+          <Link href="/dashboard">
             <span
               className="text-xl font-bold text-white"
               style={{ fontFamily: "var(--font-display)" }}
