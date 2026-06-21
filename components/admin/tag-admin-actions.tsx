@@ -5,6 +5,7 @@ import {
   disableTagAction,
   markTagReplacedAction,
   reactivateTagAction,
+  deleteTagAction,
 } from "@/server/actions/admin-tag.actions";
 
 export function TagAdminActions({ tagId, status }: { tagId: string; status: string }) {
@@ -39,6 +40,17 @@ export function TagAdminActions({ tagId, status }: { tagId: string; status: stri
           Réactiver
         </button>
       )}
+      <button
+        disabled={pending}
+        onClick={() => {
+          if (confirm("Supprimer définitivement cette médaille ?")) {
+            startTransition(() => deleteTagAction(tagId));
+          }
+        }}
+        className="rounded-full border border-red-200 px-3 py-1 text-xs font-medium text-red-500 hover:bg-red-50 disabled:opacity-50"
+      >
+        Supprimer
+      </button>
     </div>
   );
 }
