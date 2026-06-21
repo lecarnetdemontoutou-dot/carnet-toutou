@@ -18,10 +18,9 @@ export default function ForgotPasswordPage() {
       email,
       redirectTo: `${window.location.origin}/reset-password`,
     });
-    console.log("[forgot-password] result:", JSON.stringify(result));
     setPending(false);
     if (result?.error) {
-      setError(JSON.stringify(result.error));
+      setError("Une erreur est survenue. Réessaie dans quelques instants.");
       return;
     }
     setSent(true);
