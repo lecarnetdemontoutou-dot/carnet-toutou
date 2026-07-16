@@ -5,7 +5,7 @@ import { sendLocationAction } from "@/server/actions/location.actions";
 
 type State = "idle" | "loading" | "sent" | "error" | "denied";
 
-export function LocationButton({ petName, phone }: { petName: string; phone: string }) {
+export function LocationButton({ petId, petName }: { petId: string; petName: string }) {
   const [state, setState] = useState<State>("idle");
 
   async function handleClick() {
@@ -20,8 +20,8 @@ export function LocationButton({ petName, phone }: { petName: string; phone: str
       async (pos) => {
         try {
           await sendLocationAction({
+            petId,
             petName,
-            phone,
             lat: pos.coords.latitude,
             lng: pos.coords.longitude,
           });

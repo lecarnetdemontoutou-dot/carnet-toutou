@@ -263,31 +263,3 @@ model FoundReport {
   @@index([petId])
   @@map("found_reports")
 }
-
-// ----------------------------------------------------------------------------
-// Bingo souvenirs (anniversaire d'Oriane) — jeu collaboratif ponctuel
-// ----------------------------------------------------------------------------
-
-model BingoCell {
-  index  Int    @id
-  text   String
-  points Int
-
-  @@map("bingo_cells")
-}
-
-model BingoCheck {
-  id        String @id @default(cuid())
-  cellIndex Int
-  name      String
-
-  @@unique([cellIndex, name])
-  @@map("bingo_checks")
-}
-
-model BingoMeta {
-  id       String  @id @default("singleton")
-  notified Boolean @default(false)
-
-  @@map("bingo_meta")
-}

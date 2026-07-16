@@ -126,9 +126,7 @@ export default async function PublicScanPage({
             </PublicActionButton>
           )}
 
-          {primaryPhone && (
-            <LocationButton petName={pet.name} phone={primaryPhone} />
-          )}
+          <LocationButton petId={pet.id} petName={pet.name} />
 
         </div>
 
