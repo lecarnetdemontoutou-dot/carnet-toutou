@@ -5,6 +5,7 @@ import { recordScanEvent } from "@/server/services/tracking.service";
 import { TagStateScreen } from "@/components/public-profile/tag-state-screen";
 import { PublicActionButton } from "@/components/public-profile/public-action-button";
 import { InfoAccordion } from "@/components/public-profile/info-accordion";
+import { LocationButton } from "@/components/public-profile/location-button";
 
 export const dynamic = "force-dynamic";
 
@@ -123,6 +124,10 @@ export default async function PublicScanPage({
             >
               💬 Envoyer un SMS
             </PublicActionButton>
+          )}
+
+          {primaryPhone && (
+            <LocationButton petName={pet.name} phone={primaryPhone} />
           )}
 
         </div>
